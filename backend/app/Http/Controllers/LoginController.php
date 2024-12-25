@@ -34,4 +34,9 @@ class LoginController
             'password' => 'Password salah',
         ])->withInput();
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        return redirect('/');
+    }
 }
