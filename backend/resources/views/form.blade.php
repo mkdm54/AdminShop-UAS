@@ -39,6 +39,9 @@
             </div>
             <button class="login-btn" type="submit">Log In</button>
         </form>
+        <p class="register">
+            Don’t have an account? <a href="#">Register here</a>
+        </p>
     </div>
 </body>
 
