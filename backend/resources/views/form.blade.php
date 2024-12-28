@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(['resources/css/form.css'])
+    @vite(['resources/css/app.css', 'resources/css/form.css'])
     <title>Login Page</title>
 </head>
 
@@ -13,11 +13,11 @@
         {{-- <div class="logo">
             <img src="logo.png" alt="Logo">
         </div> --}}
-        <form method="POST" >
+        <form method="POST">
             @csrf
             <div class="input-group">
-                <label for="name">Name<span class="required">*</span></label>
-                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                <label for="name">Username<span class="required font-mono">*</span></label>
+                <input type="text" id="name" name="name" placeholder="Enter your username" required>
             </div>
             <div class="input-group">
                 <label for="email">Email<span class="required">*</span></label>
