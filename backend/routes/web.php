@@ -18,5 +18,5 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 });
 
 Route::middleware([USerMiddleware::class])->group(function () {
-    //Route::get('/dashboard',[UserController::class, 'index'])->name('user.dashboard');
+    Route::resource('user', AdminController::class);
 });
