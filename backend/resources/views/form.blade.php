@@ -13,11 +13,11 @@
         {{-- <div class="logo">
             <img src="logo.png" alt="Logo">
         </div> --}}
-        <form id="form-input" method="POST">
+        <form id="form-input" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="input-group">
-                <label for="name">Username<span class="required text-red-500 font-mono">*</span></label>
-                <input class="username-input" type="text" id="name" name="name"
+                <label for="username">Username<span class="required text-red-500 font-mono">*</span></label>
+                <input class="username-input" type="text" id="username" name="username"
                     placeholder="Enter your username" required>
             </div>
             <div class="input-group">
