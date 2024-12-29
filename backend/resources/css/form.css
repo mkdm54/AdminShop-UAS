@@ -1,124 +1,38 @@
-/* styles.css */
-body {
-    background-color: #6c63ff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-2xl text-gray-800 my-2;
+    }
+
+    p {
+        @apply text-sm text-gray-600;
+    }
+
+    .logo img {
+        @apply w-12 mb-4;
+    }
+
+    .input-group label {
+        @apply text-sm text-gray-800 block mb-2;
+    }
+
+    a {
+        @apply text-indigo-500 no-underline;
+    }
 }
 
-.login-container {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 400px;
-}
+@layer utilities {
 
-.logo img {
-    width: 50px;
-    margin-bottom: 1rem;
-}
+    .username-input,
+    .email-input,
+    .pw-input {
+        @apply w-full p-2 text-sm border border-gray-200 rounded-md shadow-sm focus:outline-none;
+    }
 
-h1 {
-    font-size: 24px;
-    color: #333;
-    margin: 0.5rem 0;
-}
-
-p {
-    font-size: 14px;
-    color: #666;
-}
-
-.input-group {
-    text-align: left;
-    margin-bottom: 1rem;
-}
-
-.input-group label {
-    font-size: 14px;
-    color: #333;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.input-group .required {
-    color: #ff0000;
-}
-
-#form-input .username-input,
-#form-input .email-input,
-#form-input .pw-input {
-    width: 100%;
-    padding: 0.5rem;
-    font-size: 14px;
-    border: 1px solid #ececec;
-    border-radius: 7px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    outline: none;
-}
-
-.input-group .password-wrapper {
-    position: relative;
-}
-
-.password-wrapper input {
-    width: calc(100% - 40px);
-    padding-right: 40px;
-}
-
-.password-wrapper .show-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: url('eye-icon.png') no-repeat center;
-    background-size: 16px 16px;
-    border: none;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
-.options {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    margin-bottom: 1rem;
-}
-
-.options a {
-    color: #6c63ff;
-    text-decoration: none;
-}
-
-.login-btn {
-    background-color: #6c63ff;
-    color: #ffffff;
-    border: none;
-    padding: 0.7rem 1rem;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.or {
-    font-size: 14px;
-    color: #666;
-    margin: 1rem 0;
-}
-
-.register {
-    font-size: 14px;
-    color: #666;
-    margin-top: 1rem;
-}
-
-.register a {
-    color: #6c63ff;
-    text-decoration: none;
+    .input-group {
+        @apply text-left mb-4;
+    }
 }
