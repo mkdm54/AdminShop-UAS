@@ -15,10 +15,11 @@ class LoginController
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|min:4|max:50|',
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
+            'username' => ['required', 'string', 'min:4', 'max:50', 'unique:users,username'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string', 'min:6'],
         ]);
+
         $credentials = $request->only('username', 'email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -30,9 +31,7 @@ class LoginController
         }
 
         return redirect()->back()->withErrors([
-            'username' => 'Username salah',
-            'email' => 'Email salah',
-            'password' => 'Password salah',
+            'login' => 'Username, email, atau password tidak cocok dengan catatan kami.',
         ])->withInput();
     }
 
