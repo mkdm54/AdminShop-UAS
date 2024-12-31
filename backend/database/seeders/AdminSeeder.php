@@ -22,6 +22,6 @@ class AdminSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        User::where('id', '1')->update(['username' => 'admin']);
+        User::where('id', '1')->update(['password' => bcrypt('qwerty')]);
     }
 }
