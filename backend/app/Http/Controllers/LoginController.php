@@ -15,7 +15,7 @@ class LoginController
     public function login(Request $request)
     {
         $request->validate([
-            'username' => ['required', 'string', 'min:4', 'max:50', 'unique:users,username'],
+            'username' => ['required', 'string', 'min:4', 'max:50'],
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'min:6'],
         ]);
@@ -26,7 +26,7 @@ class LoginController
             if (Auth::user()->role === 'admin') {
                 return redirect()->route('admin.index');
             } elseif (Auth::user()->role === 'user') {
-                return redirect()->route('user.dashboard');
+                return redirect()->route('user.index');
             }
         }
 

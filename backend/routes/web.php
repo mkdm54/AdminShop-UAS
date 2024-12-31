@@ -18,5 +18,5 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 });
 
 Route::middleware([USerMiddleware::class])->group(function () {
-    Route::resource('user', AdminController::class);
+    Route::resource('user', UserController::class);
 });

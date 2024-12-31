@@ -40,7 +40,9 @@
                 </label>
                 <a href="#">Forgot your password?</a>
             </div>
-            <button class="login-btn bg-indigo-500 text-white border-none px-4 py-2 text-base rounded cursor-pointer w-full" type="submit">Log In</button>
+            <button
+                class="login-btn bg-indigo-500 text-white border-none px-4 py-2 text-base rounded cursor-pointer w-full"
+                type="submit">Log In</button>
         </form>
         <p class="register text-sm text-gray-600 mt-4">
             Don’t have an account? <a href="#">Register here</a>
