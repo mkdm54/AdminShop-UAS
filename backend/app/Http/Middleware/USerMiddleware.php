@@ -17,11 +17,11 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        Log::info('UserMiddleware dijalankan.');
-        if (Auth::check() && Auth::user()->role === config('roles.user')) {
+        if (Auth::check() && Auth::user()->role === 'user') {
+            Log::info('UserMiddleware dijalankan.');
             return $next($request);
         }
-        Log::warning('Akses ditolak. Role: ' . Auth::user()->role);
-        return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini');
+        Log::warning('Akses ditolak. Role: ' . (Auth::check() ? Auth::user()->role : 'null'));
+        return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman ini');
     }
 }

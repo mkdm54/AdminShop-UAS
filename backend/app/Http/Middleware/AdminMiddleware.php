@@ -17,11 +17,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        Log::info('AdminMiddleware dijalankan.');
-        if (Auth::check() && Auth::user()->role === config('roles.admin')) {
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            Log::info('AdminMiddleware dijalankan.');
             return $next($request);
         }
-        Log::warning('Akses ditolak. Role: ' . Auth::user()->role);
-        return redirect('/')->with('error', "Anda tidak memiliki akses ke halaman ini");
+        Log::warning('Akses ditolak. Role: ' . (Auth::check() ? Auth::user()->role : 'null'));
+        return redirect()->route('home')->with('error', "Anda tidak memiliki akses ke halaman ini");
     }
 }

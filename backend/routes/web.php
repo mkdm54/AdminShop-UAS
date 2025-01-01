@@ -8,15 +8,15 @@ use App\Http\Middleware\UserMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('/', 'showLoginForm');
+    Route::get('/', 'showLoginForm')->name('home');
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout');
 });
 
-Route::middleware([AdminMiddleware::class])->group(function () {
+Route::middleware(['isAdmin'])->group(function () {
     Route::resource('admin', AdminController::class);
 });
 
-Route::middleware([UserMiddleware::class])->group(function () {
+Route::middleware(['isUser'])->group(function () {
     Route::resource('user', UserController::class);
 });
