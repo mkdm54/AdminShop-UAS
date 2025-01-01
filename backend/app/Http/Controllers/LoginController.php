@@ -16,7 +16,6 @@ class LoginController
     {
         $request->validate([
             'username' => ['required', 'string', 'min:4', 'max:50'],
-            'email' => ['required', 'email'],
             'password' => ['required', 'string', 'min:6'],
         ]);
 

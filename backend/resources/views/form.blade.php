@@ -22,11 +22,6 @@
                     placeholder="Enter your username" required>
             </div>
             <div class="input-group">
-                <label for="email">Email<span class="required text-red-500 font-mono">*</span></label>
-                <input class="email-input" type="email" id="email" name="email"
-                    placeholder="Enter your email address" required>
-            </div>
-            <div class="input-group">
                 <label for="password">Password<span class="required text-red-500 font-mono">*</span></label>
                 <div class="password-wrapper relative">
                     <input class="pw-input" type="password" id="password" name="password" placeholder="Enter password"
