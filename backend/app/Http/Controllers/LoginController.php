@@ -39,6 +39,24 @@ class LoginController
         return view('create-account');
     }
 
+    public function registerAccount(Request $request)
+    {
+        $request->validate([
+            'username' => ['required', 'string', 'min:4', 'max:50', 'unique:users,username'],
+            'password' => ['required', 'string', 'min:6'],
+        ]);
+
+        $user = new \App\Models\User();
+        $user->username = $request->input('username');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        return response()->json([
+            'message' => 'Akun berhasil dibuat',
+            'redirect' => route('home')
+        ], 200);
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
