@@ -19,7 +19,7 @@ class LoginController
             'password' => ['required', 'string', 'min:6'],
         ]);
 
-        $credentials = $request->only('username', 'email', 'password');
+        $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
             if (Auth::user()->role === 'admin') {
@@ -32,6 +32,11 @@ class LoginController
         return redirect()->back()->withErrors([
             'login' => 'Username, email, atau password tidak cocok dengan catatan kami.',
         ])->withInput();
+    }
+
+    public function createAccount()
+    {
+        return view('create-account');
     }
 
     public function logout(Request $request)
