@@ -36,7 +36,7 @@ class AuthController
 
     public function createAccount()
     {
-        return view('create-account');
+        return view('create-form');
     }
 
     public function registerAccount(Request $request)

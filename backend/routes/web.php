@@ -11,6 +11,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/', 'showLoginForm')->name('home');
     Route::post('/login', 'login')->name('login');
     Route::post('/logout', 'logout')->name('logout');
+
+    // Register account
+    Route::get('/register', 'createAccount')->name('register.form');
+    Route::post('/register', 'registerAccount')->name('register.submit');
 });
 
 Route::middleware(['isAdmin'])->group(function () {
