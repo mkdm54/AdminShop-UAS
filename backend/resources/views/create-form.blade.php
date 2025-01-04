@@ -15,7 +15,7 @@
             <img src="logo.png" alt="Logo">
         </div> --}}
         <h1 class="uppercase font-bold">register</h1>
-        <form id="form-input" method="POST" action="{{ route('login') }}">
+        <form id="form-input" method="POST" action="{{ route('register.submit') }}">
             @csrf
             <div class="input-group">
                 <label for="username">Username<span class="required text-red-500 font-mono">*</span></label>
