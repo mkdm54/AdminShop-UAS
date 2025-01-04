@@ -46,8 +46,11 @@ class AuthController
             'password' => ['required', 'string', 'min:6'],
         ]);
 
+        $defaulteEmail = $request->input('username') . '@gmail.com';
+
         $user = new \App\Models\User();
         $user->username = $request->input('username');
+        $user->email =  $defaulteEmail;
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
