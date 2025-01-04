@@ -14,6 +14,7 @@
         {{-- <div class="logo">
             <img src="logo.png" alt="Logo">
         </div> --}}
+        <h1 class="uppercase font-bold">register</h1>
         <form id="form-input" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="input-group">
@@ -28,20 +29,10 @@
                         required>
                 </div>
             </div>
-            <div class="options flex justify-between text-xs mb-4">
-                <label>
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-                <a href="#">Forgot your password?</a>
-            </div>
             <button
                 class="login-btn bg-indigo-500 text-white border-none px-4 py-2 text-base rounded cursor-pointer w-full"
-                type="submit">Log In</button>
+                type="submit">Register</button>
         </form>
-        <p class="register text-sm text-gray-600 mt-4">
-            Don’t have an account? <a href="{{ route('register.form') }}">Register here</a>
-        </p>
     </div>
 </body>
 
