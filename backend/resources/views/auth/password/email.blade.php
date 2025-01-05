@@ -14,7 +14,7 @@
         {{-- <div class="logo">
             <img src="logo.png" alt="Logo">
         </div> --}}
-        <h1 class="uppercase font-bold">register</h1>
+        <h1 class="uppercase font-bold">Reset Password</h1>
         <form id="form-input" method="POST" action="{{ route('password.email') }}">
             @csrf
             <x-input-component name="email" label="Email" type="email" placeholder="Enter your email"></x-input-component>
