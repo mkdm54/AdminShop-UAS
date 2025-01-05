@@ -40,7 +40,7 @@ class ForgotPasswordController
         ]);
 
         $status = Password::sendResetLink(
-            $request->only('token', 'email', 'password_confirmed', 'password'),
+            $request->only('token', 'email', 'password_confirmation', 'password'),
             function ($user, $password) {
                 $user->password = bcrypt($password);
                 $user->save();
