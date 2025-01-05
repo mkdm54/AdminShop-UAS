@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\UserMiddleware;
@@ -15,6 +16,13 @@ Route::controller(AuthController::class)->group(function () {
     // Register account
     Route::get('/register', 'createAccount')->name('register.form');
     Route::post('/register', 'registerAccount')->name('register.submit');
+});
+
+Route::controller(ForgotPasswordController::class)->group(function () {
+    Route::get('/forgot-password', 'showForgotPasswordForm');
+    Route::post('/forgot-password', 'sendResetLink');
+    Route::get('/password/reset/{token}', 'showResetPasswordForm');
+    Route::post('/password/reset', 'resetPassword');
 });
 
 Route::middleware(['isAdmin'])->group(function () {
