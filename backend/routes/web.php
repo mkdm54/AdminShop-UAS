@@ -17,10 +17,10 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(ForgotPasswordController::class)->group(function () {
-    Route::get('/forgot-password', 'showForgotPasswordForm');
-    Route::post('/forgot-password', 'sendResetLink');
-    Route::get('/password/reset/{token}', 'showResetPasswordForm');
-    Route::post('/password/reset', 'resetPassword');
+    Route::get('/forgot-password', 'showForgotPasswordForm')->name('password.request');
+    Route::post('/forgot-password', 'sendResetLink')->name('password.email');
+    Route::get('/password/reset/{token}', 'showResetPasswordForm')->name('password.reset');
+    Route::post('/password/reset', 'resetPassword')->name('password.update');
 });
 
 Route::middleware(['isAdmin'])->group(function () {
