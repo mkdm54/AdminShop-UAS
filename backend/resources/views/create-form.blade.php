@@ -19,9 +19,7 @@
             @csrf
             <x-input-component name="username" label="Username" type="text"></x-input-component>
             <x-input-component name="password" label="Password" type="password"></x-input-component>
-            <button
-                class="login-btn bg-indigo-500 text-white border-none px-4 py-2 text-base rounded cursor-pointer w-full"
-                type="submit">Register</button>
+            <x-button type="submit">Register</x-button>
         </form>
     </div>
 </body>
