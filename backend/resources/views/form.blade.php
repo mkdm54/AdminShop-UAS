@@ -16,8 +16,8 @@
         </div> --}}
         <form id="form-input" method="POST" action="{{ route('login') }}">
             @csrf
-            <x-input-component name="username" label="Username" type="text"></x-input-component>
-            <x-input-component name="password" label="Password" type="password"></x-input-component>
+            <x-input-component name="username" label="Username" type="text" placeholder="Enter your username"></x-input-component>
+            <x-input-component name="password" label="Password" type="password" placeholder="Enter your password"></x-input-component>
             <div class="options flex justify-between text-xs mb-4">
                 <label>
                     <input type="checkbox" name="remember">
