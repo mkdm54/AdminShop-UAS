@@ -17,18 +17,8 @@
         <h1 class="uppercase font-bold">register</h1>
         <form id="form-input" method="POST" action="{{ route('register.submit') }}">
             @csrf
-            <div class="input-group">
-                <label for="username">Username<span class="required text-red-500 font-mono">*</span></label>
-                <input class="username-input" type="text" id="username" name="username"
-                    placeholder="Enter your username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password<span class="required text-red-500 font-mono">*</span></label>
-                <div class="password-wrapper relative">
-                    <input class="pw-input" type="password" id="password" name="password" placeholder="Enter password"
-                        required>
-                </div>
-            </div>
+            <x-input-component name="username" label="Username" type="text"></x-input-component>
+            <x-input-component name="password" label="Password" type="password"></x-input-component>
             <button
                 class="login-btn bg-indigo-500 text-white border-none px-4 py-2 text-base rounded cursor-pointer w-full"
                 type="submit">Register</button>

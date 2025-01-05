@@ -16,18 +16,8 @@
         </div> --}}
         <form id="form-input" method="POST" action="{{ route('login') }}">
             @csrf
-            <div class="input-group">
-                <label for="username">Username<span class="required text-red-500 font-mono">*</span></label>
-                <input class="username-input" type="text" id="username" name="username"
-                    placeholder="Enter your username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Password<span class="required text-red-500 font-mono">*</span></label>
-                <div class="password-wrapper relative">
-                    <input class="pw-input" type="password" id="password" name="password" placeholder="Enter password"
-                        required>
-                </div>
-            </div>
+            <x-input-component name="username" label="Username" type="text"></x-input-component>
+            <x-input-component name="password" label="Password" type="password"></x-input-component>
             <div class="options flex justify-between text-xs mb-4">
                 <label>
                     <input type="checkbox" name="remember">
