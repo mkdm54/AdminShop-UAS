@@ -18,10 +18,10 @@
                 <x-input-component name="username" label="Username" type="text" placeholder="Enter your username" error="username salah"></x-input-component>
                 <x-input-component name="password" label="Password" type="password" placeholder="Enter your password" error="password salah salah"></x-input-component>
                 <div class="options flex justify-between text-xs mb-4">
-                    <label>
+                    {{-- <label>
                         <input type="checkbox" name="remember">
                         Remember me
-                    </label>
+                    </label> --}}
                     <a href="{{ route('password.request') }}">Forgot your password?</a>
                 </div>
                 <x-button type="submit">Log In</x-button>
