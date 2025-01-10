@@ -10,7 +10,7 @@ class ForgotPasswordController
 {
     public function showForgotPasswordForm()
     {
-        return view('auth.password.email');
+        return view('auth.passwords.email');
     }
 
     public function sendResetLink(Request $request)
