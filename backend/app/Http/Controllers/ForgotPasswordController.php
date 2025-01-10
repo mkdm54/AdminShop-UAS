@@ -39,7 +39,7 @@ class ForgotPasswordController
             'password' => ['bail', 'required', 'string', 'min:6', 'confirmed']
         ]);
 
-        $status = Password::sendResetLink(
+        $status = Password::reset(
             $request->only('token', 'email', 'password_confirmation', 'password'),
             function ($user, $password) {
                 $user->password = bcrypt($password);
@@ -47,8 +47,8 @@ class ForgotPasswordController
             }
         );
 
-        return $status = Password::PASSWORD_RESET ?  
-            redirect()->route('home')->with('status', __($status)) : 
+        return $status = Password::PASSWORD_RESET ?
+            redirect()->route('home')->with('status', __($status)) :
             back()->withErrors(['email' => [__($status)]]);
     }
 }
