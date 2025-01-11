@@ -19,19 +19,33 @@ class AuthController
             'password' => ['required', 'string', 'min:6'],
         ]);
 
-        $credentials = $request->only('username', 'password');
+        $user = \App\Models\User::where('username', $request->username)->first();
 
-        if (Auth::attempt($credentials)) {
-            if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.index');
-            } elseif (Auth::user()->role === 'user') {
-                return redirect()->route('user.index');
-            }
+        if (!$user) {
+            return response()->json(['Error' => 'username tidak ditemukan'], 404);
         }
 
-        return redirect()->back()->withErrors([
-            'login' => 'Username, email, atau password tidak cocok dengan catatan kami.',
-        ])->withInput();
+        if (!Auth::attempt($request->only('username', 'password'))) {
+            return response()->json(['error' => 'Password salah'], 401);
+        }
+
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return response()->json([
+                'message' => 'Login berhasil sebagai Admin.',
+                'redirect' => route('admin.index'),
+            ]);
+        } elseif ($user->role === 'user') {
+            return response()->json([
+                'message' => 'Login berhasil sebagai User.',
+                'redirect' => route('user.index'),
+            ]);
+        }
+
+        return response()->json([
+            'error' => 'Terjadi kesalahan tidak terduga.'
+        ], 500);
     }
 
     public function createAccount()

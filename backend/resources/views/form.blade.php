@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
-    @vite(['resources/css/form.css'])
+    @vite(['resources/css/form.css', 'resources/js/form.js'])
     <title>Login Page</title>
 </head>
 
