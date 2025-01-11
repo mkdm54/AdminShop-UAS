@@ -16,9 +16,9 @@
         <form id="form-reset" method="POST" action="{{ route('password.update') }}">
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
-            <x-input-component name="email" label="Email" type="email" placeholder="Enter your email" required></x-input-component>
-            <x-input-component name="password" label="New Password" type="password" placeholder="Enter new password" required></x-input-component>
-            <x-input-component name="password_confirmation" label="Confirm Password" type="password" placeholder="Confirm new password" required></x-input-component>
+            <x-input-component id="email-input" name="email" label="Email" type="email" placeholder="Enter your email" required></x-input-component>
+            <x-input-component id="password-input" name="password" label="New Password" type="password" placeholder="Enter new password" required></x-input-component>
+            <x-input-component id="password-input" name="password_confirmation" label="Confirm Password" type="password" placeholder="Confirm new password" required></x-input-component>
             <x-button type="submit">Reset Password</x-button>
         </form>
     </div>

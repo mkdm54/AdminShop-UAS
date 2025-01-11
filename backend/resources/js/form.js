@@ -1,12 +1,11 @@
 // untuk view form.blade.php
-
 function showAlert(type, message, label) {
     const alertIcon = document.getElementById('aler-icon');
     const alertLabel = document.getElementById('alert-label');
     const alertMessage = document.getElementById('aler-message');
     const alertContainer = document.getElementById('alert-container');
 
-    alertContainer.className = `flex items-center gap-2 p-2 w-1/3 mb-2 rounded-lg shadow-md transition-transform duration-300 ease-in-out opacity-95 hover:scale-105 hover:opacity-100 ${type === 'success'
+    alertContainer.className = `flex items-center gap-2 p-1 w-4/5 mb-2 rounded-lg shadow-md transition-transform duration-300 ease-in-out opacity-95 hover:scale-105 hover:opacity-100 ${type === 'success'
         ? 'text-green-800 bg-green-100 border border-green-300'
         : type === 'warning'
             ? 'text-yellow-800 bg-yellow-100 border border-yellow-300'
@@ -26,6 +25,8 @@ function showAlert(type, message, label) {
 
     alertLabel.innerHTML = label;
     alertMessage.innerHTML = message;
+    alertContainer.style.display = 'flex'; // Menampilkan container
+
     setTimeout(() => {
         alertContainer.style.display = 'none';
     }, 4000);
@@ -33,11 +34,12 @@ function showAlert(type, message, label) {
 
 document.getElementById('form-input').addEventListener('submit', function (event) {
     event.preventDefault();
+    
 
     showAlert('info', 'Sedang memproses...', 'Proses Login');
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById('username-input').value;
+    const password = document.getElementById('password-input').value;
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     fetch('/login', {
@@ -52,7 +54,7 @@ document.getElementById('form-input').addEventListener('submit', function (event
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
-            return response.json(); 
+            return response.json();
         })
         .then(data => {
             //hapus pesan loading ketika selesai
@@ -60,10 +62,16 @@ document.getElementById('form-input').addEventListener('submit', function (event
 
             if (data.error) {
                 showAlert('error', data.error, 'Error');
-                window.location.href = data.redirect;
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 4000); // Tunda redirect
+                
             } else {
-                showAlert('success', 'Login berhasil!', 'Success');
-                window.location.href = data.redirect;
+                showAlert('success', data.success, 'Success');
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 4000); // Tunda redirect
+                
             }
         }).catch(() => {
             showAlert('error', 'Terjadi kesalahan server.', 'Error');

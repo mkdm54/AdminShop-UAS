@@ -18,7 +18,7 @@
         <h1 class="uppercase font-bold">Reset Password</h1>
         <form id="form-input" method="POST" action="{{ route('password.email') }}">
             @csrf
-            <x-input-component name="email" label="Email" type="email" placeholder="Enter your email"></x-input-component>
+            <x-input-component id="email-input" name="email" label="Email" type="email" placeholder="Enter your email"></x-input-component>
             <x-button type="submit">Send Password Reset Link</x-button>
         </form>
     </div>
