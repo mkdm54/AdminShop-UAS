@@ -5,7 +5,7 @@ function showAlert(type, message, label) {
     const alertMessage = document.getElementById('aler-message');
     const alertContainer = document.getElementById('alert-container');
 
-    alertContainer.className = `flex items-center gap-2 p-1 w-4/5 mb-2 rounded-lg shadow-md transition-transform duration-300 ease-in-out opacity-95 hover:scale-105 hover:opacity-100 ${type === 'success'
+    alertContainer.className = `flex items-center gap-2 p-1 w-auto mb-2 rounded-lg shadow-md transition-transform duration-300 ease-in-out opacity-95 hover:scale-105 hover:opacity-100 ${type === 'success'
         ? 'text-green-800 bg-green-100 border border-green-300'
         : type === 'warning'
             ? 'text-yellow-800 bg-yellow-100 border border-yellow-300'
