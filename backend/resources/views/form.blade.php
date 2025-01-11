@@ -12,10 +12,10 @@
 </head>
 
 <body class="bg-indigo-500 flex justify-center items-center h-screen m-0">
-    <x-alert-message type="error"></x-alert-message>
     <div class="flex flex-col items-center gap-4">
+        <x-alert-message></x-alert-message>
         <div class="login-container bg-white p-8 rounded-lg shadow-md text-center w-96">
-            <form id="form-input" method="POST" action="{{ route('login') }}">
+            <form id="form-input">
                 @csrf
                 <x-input-component name="username" label="Username" type="text" placeholder="Enter your username" error="username salah"></x-input-component>
                 <x-input-component name="password" label="Password" type="password" placeholder="Enter your password" error="password salah salah"></x-input-component>

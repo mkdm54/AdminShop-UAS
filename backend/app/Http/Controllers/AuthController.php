@@ -22,23 +22,29 @@ class AuthController
         $user = \App\Models\User::where('username', $request->username)->first();
 
         if (!$user) {
-            return response()->json(['Error' => 'username tidak ditemukan'], 404);
+            return response()->json([
+                'error' => 'username tidak ditemukan',
+                'redirect' => route('home'),
+            ], 404);
         }
 
         if (!Auth::attempt($request->only('username', 'password'))) {
-            return response()->json(['error' => 'Password salah'], 401);
+            return response()->json([
+                'error' => 'Password salah',
+                'redirect' => route('home'),
+            ], 401);
         }
 
         $user = Auth::user();
 
         if ($user->role === 'admin') {
             return response()->json([
-                'message' => 'Login berhasil sebagai Admin.',
+                'success' => 'Login berhasil sebagai Admin.',
                 'redirect' => route('admin.index'),
             ]);
         } elseif ($user->role === 'user') {
             return response()->json([
-                'message' => 'Login berhasil sebagai User.',
+                'success' => 'Login berhasil sebagai User.',
                 'redirect' => route('user.index'),
             ]);
         }
