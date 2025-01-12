@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminController
@@ -11,7 +12,8 @@ class AdminController
      */
     public function index()
     {
-        //
+        $products =  Product::all();
+        return view('admin.dashboard', compact('products'));
     }
 
     /**
@@ -19,7 +21,7 @@ class AdminController
      */
     public function create()
     {
-        //
+        return view('admin.create');
     }
 
     /**
@@ -27,7 +29,15 @@ class AdminController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'quantity' => 'required|integer',
+        ]);
+
+        $products = Product::create($request->all());
+        return redirect()->route('admin.index')->with('success', 'Product ' . $products->name . ' berhasil ditambahkan');
     }
 
     /**
@@ -35,7 +45,8 @@ class AdminController
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.show', compact('product'));
     }
 
     /**
@@ -43,7 +54,8 @@ class AdminController
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.edit', compact('product'));
     }
 
     /**
@@ -51,7 +63,16 @@ class AdminController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
+            'quantity' => 'required|integer',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($request->all());
+        return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil diperbarui');
     }
 
     /**
@@ -59,6 +80,8 @@ class AdminController
      */
     public function destroy(string $id)
     {
-        //
+        $product =  Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil dihapus');
     }
 }
