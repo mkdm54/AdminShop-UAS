@@ -64,11 +64,11 @@
             </a>
             <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-table mr-3"></i>
-                Show Prodcut
+                Show Product
             </a>
             <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
                 <i class="fas fa-align-left mr-3"></i>
-                Add Prduct
+                Add Product
             </a>
         </nav>
     </aside>
