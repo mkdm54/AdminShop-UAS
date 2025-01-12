@@ -70,7 +70,7 @@
                             <x-input-component id="price" name="price" label="Price" type="text" placeholder="Enter your price"></x-input-component>
                             <x-input-component id="description" name="description" label="Description" type="text" placeholder="Description"></x-input-component>
                             <x-input-component id="quantity" name="quantity" label="Quantity" type="text" placeholder="Quantity"></x-input-component>
-                            <x-button type="submit">Add</x-button>
+                            <x-button title="Add Product" type="submit">Add</x-button>
                         </form>
                     </div>
                 </div>
