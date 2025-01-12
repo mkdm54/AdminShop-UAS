@@ -45,19 +45,23 @@
 
 <body class="bg-gray-100 font-family-karla flex">
 
+    {{-- *Side Bar --}}
     <x-admin-side-bar :username="$username"></x-admin-side-bar>
 
     <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
+        {{-- *Desktop Header --}}
         <x-dekstop-header :username="$username"></x-dekstop-header>
 
-        <!-- Mobile Header & Nav -->
+        {{-- *Mobile Header & Nav --}}
         <x-mobile-header-nav></x-mobile-header-nav>
 
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
                 <h1 class="w-full text-3xl text-black pb-6">Add Product</h1>
                 <div class="flex flex-col items-center gap-4">
+                    <p class="text-xl pb-3 flex items-center">
+                        <i class="fas fa-list mr-3"></i> Table Example
+                    </p>
                     <x-alert-message></x-alert-message>
                     <div class="login-container bg-white p-8 rounded-lg shadow-md text-center w-96">
                         <form method="POST">
