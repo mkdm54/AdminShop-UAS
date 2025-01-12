@@ -48,14 +48,14 @@
 
 <body class="bg-gray-100 font-family-karla flex">
 
-    {{-- Side Bar --}}
+    {{-- *Side Bar --}}
     <x-admin-side-bar :username="$username"></x-admin-side-bar>
 
     <div class="w-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
+        {{-- *Desktop Header --}}
         <x-dekstop-header :username="$username"></x-dekstop-header>
 
-        <!-- Mobile Header & Nav -->
+        {{-- *Mobile Header & Nav --}}
         <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
             <div class="flex items-center justify-between">
                 <a href="{{ route('admin.index') }}"
@@ -66,35 +66,8 @@
                 </button>
             </div>
 
-            <!-- Dropdown Nav -->
-            <nav :class="isOpen ? 'flex' : 'hidden'" class="flex flex-col pt-4">
-                <a href="{{ route('admin.index') }}" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
-                    <i class="fas fa-tachometer-alt mr-3"></i>
-                    Dashboard
-                </a>
-                <a href="{{ route('admin.products') }}"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-table mr-3"></i>
-                    Show Product
-                </a>
-                <a href="{{ route('admin.create') }}"
-                    class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-align-left mr-3"></i>
-                    Add Product
-                </a>
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    My Account
-                </a>
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit"
-                        class="flex items-center text-white opacity-75 hover:opacity-100 pr-10 pl-4 nav-item">
-                        <i class="fas fa-sign-out-alt mr-3"></i>
-                        Sign Out
-                    </button>
-                </form>
-            </nav>
+            {{-- *Dropdown Nav --}}
+            <x-dropdown-nav></x-dropdown-nav>
             <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                 <i class="fas fa-plus mr-3"></i> New Report
             </button> -->
