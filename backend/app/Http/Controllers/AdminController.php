@@ -17,7 +17,7 @@ class AdminController
     public function showAllProducts()
     {
         $products =  Product::all();
-        return view('admin.show-product', compact('products'));
+        return view('admin.show_product', compact('products'));
     }
 
     /**
@@ -25,7 +25,7 @@ class AdminController
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.add_product');
     }
 
     /**
