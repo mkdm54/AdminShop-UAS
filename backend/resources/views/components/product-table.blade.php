@@ -1,3 +1,5 @@
+@props(['products'])
+
 <div class="p-6  px-0">
     <table class="mt-4 w-full min-w-max table-auto text-left">
         <thead>
@@ -56,61 +58,63 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="p-4 border-b border-blue-gray-50">
-                    <div class="flex items-center gap-3">
+            @foreach ($products as $product)
+                <tr>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <div class="flex items-center gap-3">
+                            <div class="flex flex-col">
+                                <p
+                                    class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
+                                    {{ $product->product_name }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <div class="flex items-center gap-3">
+                            <div class="flex flex-col">
+                                <p
+                                    class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
+                                    {{ $product->price }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="p-4 border-b border-blue-gray-50">
                         <div class="flex flex-col">
                             <p
-                                class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
-                                React Project</p>
+                                class="truncate block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
+                                {{ $product->description }}</p>
                         </div>
-                    </div>
-                </td>
-                <td class="p-4 border-b border-blue-gray-50">
-                    <div class="flex items-center gap-3">
-                        <div class="flex flex-col">
-                            <p
-                                class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
-                                Rp 10000</p>
+                    </td>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <div class="flex items-center gap-3">
+                            <div class="flex flex-col">
+                                <p
+                                    class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
+                                    {{ $product->quantity }}</p>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td class="p-4 border-b border-blue-gray-50">
-                    <div class="flex flex-col">
-                        <p
-                            class="truncate block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
-                            Aroma menenangkan lavender segar.</p>
-                    </div>
-                </td>
-                <td class="p-4 border-b border-blue-gray-50">
-                    <div class="flex items-center gap-3">
-                        <div class="flex flex-col">
-                            <p
-                                class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
-                                3</p>
+                    </td>
+                    <td class="p-4 border-b border-blue-gray-50">
+                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
+                            {{ $product->created_at }}</p>
+                    </td>
+
+                    <td class=" p-4 border-b border-blue-gray-50">
+
+                        <div
+                            class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30">
+                            <span class="relative top-3 transform -translate-y-1/2 -translate-x-1/2" title="Edit">
+                                <a href="#"><i class="fa-solid fa-pencil text-green-500 text-lg"></i></a>
+                            </span>
+
+                            <span class="relative top-3 left-2 transform -translate-y-1/2 -translate-x-1/2"
+                                title="Delete">
+                                <a href="#"><i class="fa-solid fa-trash text-red-500 text-lg"></i></a>
+                            </span>
                         </div>
-                    </div>
-                </td>
-                <td class="p-4 border-b border-blue-gray-50">
-                    <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">
-                        23/04/18</p>
-                </td>
-
-                <td class=" p-4 border-b border-blue-gray-50">
-
-                    <div
-                        class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30">
-                        <span class="relative top-3 transform -translate-y-1/2 -translate-x-1/2" title="Edit">
-                            <a href="#"><i class="fa-solid fa-pencil text-green-500 text-lg"></i></a>
-                        </span>
-
-                        <span class="relative top-3 left-2 transform -translate-y-1/2 -translate-x-1/2" title="Delete">
-                            <a href="#"><i class="fa-solid fa-trash text-red-500 text-lg"></i></a>
-                        </span>
-                    </div>
-
-                </td>
-            </tr>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

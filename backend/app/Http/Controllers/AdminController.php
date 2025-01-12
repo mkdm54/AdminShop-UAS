@@ -51,7 +51,7 @@ class AdminController
 
         $products = Product::create($validatedData);
 
-        return redirect()->route('admin.index')->with('success', 'Product ' . $products->product_name . ' berhasil ditambahkan');
+        return redirect()->route('admin.products')->with('success', 'Product ' . $products->product_name . ' berhasil ditambahkan');
     }
 
     /**
