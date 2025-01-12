@@ -30,13 +30,13 @@
     
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
-                <h1 class="w-full text-3xl text-black pb-6">Forms</h1>
+                <h1 class="w-full text-3xl text-black pb-6">Add Product</h1>
 
                 <div class="flex flex-wrap">
 
                     <div class="w-full lg:w-1/2 mt-6 pl-0 lg:pl-2">
                         <p class="text-xl pb-6 flex items-center">
-                            <i class="fas fa-list mr-3"></i> Checkout Form
+                            <i class="fas fa-list mr-3"></i> Add Product Form
                         </p>
                         <div class="leading-loose">
                             <form class="p-10 bg-white rounded shadow-xl">
