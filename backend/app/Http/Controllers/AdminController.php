@@ -84,8 +84,13 @@ class AdminController
             'quantity' => 'required|integer',
         ]);
 
+        $validatedData = $request->only(['product_name', 'price', 'description', 'quantity']);
+        $validatedData['price'] = (float) $validatedData['price'];
+        $validatedData['quantity'] = (int) $validatedData['quantity'];
+
         $product = Product::findOrFail($id);
-        $product->update($request->all());
+        $product->update($validatedData);
+
         return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil diperbarui');
     }
 
