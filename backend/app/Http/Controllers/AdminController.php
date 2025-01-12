@@ -18,8 +18,9 @@ class AdminController
 
     public function showAllProducts()
     {
+        $username =Auth::user()->username;
         $products =  Product::all();
-        return view('admin.show_product', compact('products'));
+        return view('admin.show_product', compact('username','products'));
     }
 
     /**
@@ -27,7 +28,8 @@ class AdminController
      */
     public function create()
     {
-        return view('admin.add_product');
+        $username =Auth::user()->username;
+        return view('admin.add_product', compact('username'));
     }
 
     /**

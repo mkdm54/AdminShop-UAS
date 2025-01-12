@@ -18,8 +18,8 @@
         <h1 class="uppercase font-bold">register</h1>
         <form id="form-input" method="POST" action="{{ route('register.submit') }}">
             @csrf
-            <x-input-component name="username" label="Username" type="text" placeholder="Enter your username"></x-input-component>
-            <x-input-component name="password" label="Password" type="password" placeholder="Enter your password"></x-input-component>
+            <x-input-component id="username-input" name="username" label="Username" type="text" placeholder="Enter your username"></x-input-component>
+            <x-input-component id="password-input" name="password" label="Password" type="password" placeholder="Enter your password"></x-input-component>
             <x-button type="submit">Register</x-button>
         </form>
     </div>
