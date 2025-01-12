@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController
 {
@@ -11,7 +12,8 @@ class AdminController
      * Display a listing of the resource.
      */
     public function index() {
-        return view('admin.dashboard');
+        $username =Auth::user()->username;
+        return view('admin.dashboard', compact('username'));
     }
 
     public function showAllProducts()
