@@ -11,16 +11,17 @@ class AdminController
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $username =Auth::user()->username;
+    public function index()
+    {
+        $username = Auth::user()->username;
         return view('admin.dashboard', compact('username'));
     }
 
     public function showAllProducts()
     {
-        $username =Auth::user()->username;
+        $username = Auth::user()->username;
         $products =  Product::all();
-        return view('admin.show_product', compact('username','products'));
+        return view('admin.show_product', compact('username', 'products'));
     }
 
     /**
@@ -28,7 +29,7 @@ class AdminController
      */
     public function create()
     {
-        $username =Auth::user()->username;
+        $username = Auth::user()->username;
         return view('admin.add_product', compact('username'));
     }
 
@@ -44,8 +45,13 @@ class AdminController
             'quantity' => 'required|integer',
         ]);
 
-        $products = Product::create($request->all());
-        return redirect()->route('admin.index')->with('success', 'Product ' . $products->name . ' berhasil ditambahkan');
+        $validatedData = $request->only(['product_name', 'price', 'description', 'quantity']);
+        $validatedData['price'] = (float) $validatedData['price'];
+        $validatedData['quantity'] = (int) $validatedData['quantity'];
+
+        $products = Product::create($validatedData);
+
+        return redirect()->route('admin.index')->with('success', 'Product ' . $products->product_name . ' berhasil ditambahkan');
     }
 
     /**
@@ -78,8 +84,13 @@ class AdminController
             'quantity' => 'required|integer',
         ]);
 
+        $validatedData = $request->only(['product_name', 'price', 'description', 'quantity']);
+        $validatedData['price'] = (float) $validatedData['price'];
+        $validatedData['quantity'] = (int) $validatedData['quantity'];
+
         $product = Product::findOrFail($id);
-        $product->update($request->all());
+        $product->update($validatedData);
+
         return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil diperbarui');
     }
 
