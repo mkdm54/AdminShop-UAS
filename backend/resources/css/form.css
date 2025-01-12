@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-2xl text-gray-800 my-2;
+    }
+
+    p {
+        @apply text-sm text-gray-600;
+    }
+
+    .logo img {
+        @apply w-12 mb-4;
+    }
+
+    .input-group label {
+        @apply text-sm text-gray-800 block mb-2;
+    }
+
+    a {
+        @apply text-indigo-500 no-underline hover:underline;
+    }
+}
+
+@layer utilities {
+
+    .username-input,
+    .email-input,
+    .pw-input {
+        @apply w-full p-2 text-sm border border-gray-200 rounded-md shadow-sm focus:outline-none;
+    }
+
+    .input-group {
+        @apply text-left mb-4;
+    }
+}
