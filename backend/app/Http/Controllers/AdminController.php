@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController
 {
@@ -11,13 +12,14 @@ class AdminController
      * Display a listing of the resource.
      */
     public function index() {
-        return view('admin.dashboard');
+        $username =Auth::user()->username;
+        return view('admin.dashboard', compact('username'));
     }
 
     public function showAllProducts()
     {
         $products =  Product::all();
-        return view('admin.show-product', compact('products'));
+        return view('admin.show_product', compact('products'));
     }
 
     /**
@@ -25,7 +27,7 @@ class AdminController
      */
     public function create()
     {
-        return view('admin.create');
+        return view('admin.add_product');
     }
 
     /**

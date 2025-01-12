@@ -51,7 +51,7 @@
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a href="{{ route('admin.index') }}"
-                class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+                class="text-white text-3xl font-semibold uppercase hover:text-gray-300">{{ $username }}</a>
         </div>
         <nav class="text-white text-base font-semibold pt-3">
             <a href="{{ route('admin.index') }}" class="flex items-center active-nav-link text-white py-4 pl-6 nav-item">
@@ -74,6 +74,7 @@
         <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
             <div class="w-1/2"></div>
             <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                <h1 class="relative right-2 top-3">{{ $username }}</h1>
                 <button @click="isOpen = !isOpen"
                     class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
                     <img src="https://media.tenor.com/bDgdFlOwH0AAAAAi/fire-emblem-maid-fire-emblem.gif">
