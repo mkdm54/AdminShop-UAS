@@ -45,18 +45,19 @@
 
 <body class="bg-gray-100 font-family-karla flex">
 
+    {{-- *Side Bar --}}
     <x-admin-side-bar :username="$username"></x-admin-side-bar>
 
     <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
-        <!-- Desktop Header -->
+        {{-- *Desktop Header --}}
         <x-dekstop-header :username="$username"></x-dekstop-header>
 
-        <!-- Mobile Header & Nav -->
+        {{-- *Mobile Header & Nav --}}
         <x-mobile-header-nav></x-mobile-header-nav>
 
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
-                <h1 class="text-3xl text-black pb-6">Tables</h1>
+                <h1 class="text-3xl text-black pb-6">Products</h1>
                 <x-product-table></x-product-table>
             </main>
         </div>
