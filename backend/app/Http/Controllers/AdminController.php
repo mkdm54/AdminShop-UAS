@@ -44,7 +44,7 @@ class AdminController
             'quantity' => 'required|integer',
         ]);
 
-        $products = Product::create($request->all());
+        $products = Product::create($request->only(['product_name','price','description', 'quantity']));
         return redirect()->route('admin.index')->with('success', 'Product ' . $products->name . ' berhasil ditambahkan');
     }
 
