@@ -5,7 +5,7 @@
     </div>
     <nav class="text-white text-base font-semibold pt-3">
         <a href="{{ route('admin.index') }}" class="flex items-center {{ request()->routeIs('admin.index') ? 'active-nav-link' : '' }} text-white py-4 pl-6 nav-item">
-            <i class="fas fa-tachometer-alt mr-3"></i>
+            <i class="fa-solid fa-house mr-3"></i>
             Dashboard
         </a>
         <a href="{{ route('admin.create') }}" class="flex items-center {{ request()->routeIs('admin.create') ? 'active-nav-link' : '' }} text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
