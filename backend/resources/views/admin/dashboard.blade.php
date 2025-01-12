@@ -151,6 +151,7 @@
             </main>
             <h1 class="flex justify-center align-items-center text-3xl text-gray-500 pb-6">SELAMAT DATANG DI DASHBOARD
                 ADMIN</h1>
+                <img src="https://media1.tenor.com/m/9WrDUObuv44AAAAd/mha-welcome.gif" alt="welcome">
         </div>
 
     </div>
