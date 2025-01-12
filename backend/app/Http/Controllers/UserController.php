@@ -11,7 +11,7 @@ class UserController
      */
     public function index()
     {
-        //
+        return view('user.dashboard');
     }
 
     /**

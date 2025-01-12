@@ -13,12 +13,15 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        User::updateOrCreate(['id' =>  '1'], [
+            'username' => 'admin',
             'name' => 'admin',
             'email' => 'makdumibrohim@gmail.com',
             'password' => bcrypt('admin1234'),
             'role' => 'admin',
             'email_verified_at' => now(),
         ]);
+
+        User::where('id', '1')->update(['password' => bcrypt('qwerty')]);
     }
 }

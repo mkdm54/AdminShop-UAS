@@ -13,7 +13,7 @@ class AdminController
     public function index()
     {
         $products =  Product::all();
-        return view('admin.index', compact('products'));
+        return view('admin.dashboard', compact('products'));
     }
 
     /**
@@ -43,7 +43,8 @@ class AdminController
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
+    public function show(string $id)
+    {
         $product = Product::findOrFail($id);
         return view('admin.show', compact('product'));
     }
