@@ -25,6 +25,9 @@ Route::controller(ForgotPasswordController::class)->group(function () {
 
 Route::middleware(['isAdmin'])->group(function () {
     Route::resource('admin', AdminController::class);
+
+    // custom
+    Route::get('/admin/products', [AdminController::class, 'showAllProducts'])->name('admin.products');
 });
 
 Route::middleware(['isUser'])->group(function () {

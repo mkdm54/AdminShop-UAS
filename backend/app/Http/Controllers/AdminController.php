@@ -10,10 +10,14 @@ class AdminController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index() {
+        return view('admin.dashboard');
+    }
+
+    public function showAllProducts()
     {
         $products =  Product::all();
-        return view('admin.dashboard', compact('products'));
+        return view('admin.show-product', compact('products'));
     }
 
     /**
