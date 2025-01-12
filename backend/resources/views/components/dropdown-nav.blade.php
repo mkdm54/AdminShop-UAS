@@ -19,7 +19,7 @@
     </a>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
-        <button type="submit"
+        <button title="Sign Out" type="submit"
             class="flex items-center text-white opacity-75 hover:opacity-100 pr-10 pl-4 nav-item">
             <i class="fas fa-sign-out-alt mr-3"></i>
             Sign Out
