@@ -13,10 +13,6 @@
         <i class="fas fa-align-left mr-3"></i>
         Add Product
     </a>
-    <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-        <i class="fas fa-user mr-3"></i>
-        My Account
-    </a>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button title="Sign Out" type="submit"
