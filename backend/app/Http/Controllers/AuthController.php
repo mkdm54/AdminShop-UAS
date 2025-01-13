@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,16 +67,26 @@ class AuthController
             'password' => ['required', 'string', 'min:6'],
         ]);
 
-        $defaulteEmail = $request->input('username') . '@gmail.com';
+        $existingUser = \App\Models\User::where('username', $request->username)->first();
+
+        if ($existingUser) {
+            Log::info('Username already exists:', ['username' => $request->username]);
+            return response()->json([
+                'error' => 'Username sudah ada. Silakan pilih username lain.',
+                'redirect' => route('register.form'),
+            ], 422);
+        }
+
+        $defaultEmail = $request->input('username') . '@gmail.com';
 
         $user = new \App\Models\User();
         $user->username = $request->input('username');
-        $user->email =  $defaulteEmail;
+        $user->email =  $defaultEmail;
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
         return response()->json([
-            'message' => 'Akun berhasil dibuat',
+            'success' => 'Akun berhasil dibuat',
             'redirect' => route('home')
         ], 200);
     }
