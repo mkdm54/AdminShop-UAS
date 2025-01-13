@@ -4,7 +4,12 @@
     <table class="mt-4 w-full min-w-max table-auto text-left border">
         <thead class="bg-blue-500">
             <tr>
-                
+                <th class="cursor-pointer border border-gray-400 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+                    <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">
+                        No
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4"></svg>
+                    </p>
+                </th>
                 <th class="cursor-pointer border border-gray-400 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
                     <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">
                         Product
@@ -51,6 +56,13 @@
         <tbody>
             @foreach ($products as $product)
                 <tr>
+                    <td class="p-4 border border-gray-400">
+                        <div class="flex items-center gap-3">
+                            <div class="flex flex-col">
+                                <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ $loop->iteration }}</p>
+                            </div>
+                        </div>
+                    </td>
                     <td class="p-4 border border-gray-400">
                         <div class="flex items-center gap-3">
                             <div class="flex flex-col">
