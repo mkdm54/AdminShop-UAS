@@ -83,6 +83,11 @@
                         class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
                         Sign Out
                     </button>
+                    <!-- Tombol Delete Account -->
+                    <button
+                        class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
+                        Delete Account
+                    </button>
                 </div>
             </header>
 
