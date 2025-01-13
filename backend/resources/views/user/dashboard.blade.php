@@ -84,10 +84,14 @@
                         Sign Out
                     </button>
                     <!-- Tombol Delete Account -->
-                    <button
-                        class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
-                        Delete Account
-                    </button>
+                    <form id="delete-account" action="{{ route('user.destroy', ['user' => Auth::user()->id]) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit"
+                            class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
+                            Delete Account
+                        </button>
+                    </form>
                 </div>
             </header>
 
