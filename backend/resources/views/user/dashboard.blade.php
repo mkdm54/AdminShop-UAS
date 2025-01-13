@@ -79,15 +79,19 @@
                         class="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></img>
 
                     <!-- Tombol Logout -->
-                    <button
-                        class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
-                        Sign Out
-                    </button>
+                    <form id="logout-user" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button title="Sign Out" type="submit"
+                            class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
+                            Sign Out
+                        </button>
+                    </form>
                     <!-- Tombol Delete Account -->
-                    <form id="delete-account" action="{{ route('user.destroy', ['user' => Auth::user()->id]) }}" method="POST">
+                    <form id="delete-account" action="{{ route('user.destroy', ['user' => Auth::user()->id]) }}"
+                        method="POST">
                         @method('DELETE')
                         @csrf
-                        <button type="submit"
+                        <button type="submit" title="Delete Account"
                             class="bg-white hover:bg-orange-400 text-orange-600 hover:text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md transition duration-300">
                             Delete Account
                         </button>
