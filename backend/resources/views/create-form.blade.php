@@ -21,6 +21,7 @@
         </div> --}}
             <h1 class="uppercase font-bold">register</h1>
             <form id="register-account">
+                @csrf
                 <x-input-component id="create-username-input" name="username" label="Username" type="text"
                     placeholder="Enter your username"></x-input-component>
                 <x-input-component id="create-password-input" name="password" label="Password" type="password"

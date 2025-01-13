@@ -55,6 +55,7 @@ document.getElementById('register-account').addEventListener('submit', function 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            
             'X-CSRF-TOKEN': CSRF_TOKEN,
         },
         body: JSON.stringify({ username, password })
