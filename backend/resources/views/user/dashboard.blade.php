@@ -13,10 +13,11 @@
     <div class="h-screen w-full bg-white relative flex overflow-hidden">
 
         <!-- Sidebar -->
-        <aside class="h-full w-16 flex flex-col space-y-10 items-center justify-center relative bg-gray-800 text-white">
+        <aside
+            class="h-full w-16 flex flex-col space-y-10 items-center justify-center relative bg-orange-600 text-white">
             <!-- Profile -->
             <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
+                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer bg-orange-600 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                         clip-rule="evenodd" />
@@ -25,7 +26,7 @@
 
             <!-- Courses -->
             <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
+                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer bg-orange-600 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,7 +36,7 @@
 
             <!-- Theme -->
             <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
+                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer bg-orange-600 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -45,7 +46,7 @@
 
             <!-- Configuration -->
             <div
-                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer hover:text-gray-800 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
+                class="h-10 w-10 flex items-center justify-center rounded-lg cursor-pointer bg-orange-600 hover:bg-white  hover:duration-300 hover:ease-linear focus:bg-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -60,38 +61,35 @@
 
         <div class="w-full h-full flex flex-col justify-between">
             <!-- Header -->
-            <header class="h-16 w-full flex items-center relative justify-end px-5 space-x-10 bg-gray-800">
-                <!-- Informação -->
-                <div class="flex flex-shrink-0 items-center space-x-4 text-white">
+            <header class="h-16 w-full flex items-center relative justify-between px-5 bg-orange-600">
+                <!-- Logo atau Navigasi (Opsional) -->
+                <div class="text-white font-bold text-lg">
+                    <a href="#" class="hover:text-orange-300">Beranda</a>
+                </div>
 
-                    <!-- Texto -->
-                    <div class="flex flex-col items-end ">
-                        <!-- Nome -->
-                        <div class="text-md font-medium ">Unknow Unknow</div>
-                        <!-- Título -->
-                        <div class="text-sm font-regular">Student</div>
+                <!-- Informasi User -->
+                <div class="flex flex-shrink-0 items-center space-x-4 text-white">
+                    <!-- Informasi Nama -->
+                    <div class="flex flex-col items-end">
+                        <div class="text-md font-medium">{{ $username }}</div>
                     </div>
 
-                    <!-- Foto -->
-                    <div class="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></div>
-                </div>
+                    <!-- Foto Profil -->
+                    <img src="https://media.tenor.com/bDgdFlOwH0AAAAAi/fire-emblem-maid-fire-emblem.gif"
+                        class="h-10 w-10 rounded-full cursor-pointer bg-gray-200 border-2 border-blue-400"></img>
+
+                    <!-- Tombol Logout -->
+                    
             </header>
+
 
             <!-- Main -->
             <main class="max-w-full h-full flex relative overflow-y-hidden">
                 <!-- Container -->
                 <div
                     class="h-full w-full m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll">
-                    <!-- Container -->
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
-                    <div class="w-96 h-60 rounded-lg flex-shrink-0 flex-grow bg-gray-400"></div>
+                    {{-- *Product Card --}}
+                    <x-product-card :products="$products"></x-product-card>
                 </div>
             </main>
         </div>
