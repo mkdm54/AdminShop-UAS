@@ -66,6 +66,6 @@ class UserController
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('route');
+        return redirect()->route('home');
     }
 }
