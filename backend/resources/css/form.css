@@ -20,7 +20,7 @@
     }
 
     a {
-        @apply text-indigo-500 no-underline hover:underline;
+        @apply text-orange-600 no-underline hover:underline;
     }
 }
 
