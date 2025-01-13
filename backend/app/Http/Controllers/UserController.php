@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class UserController
 {
@@ -11,7 +12,8 @@ class UserController
      */
     public function index()
     {
-        return view('user.dashboard');
+        $products = Product::all();
+        return view('user.dashboard', compact('products'));
     }
 
     /**
