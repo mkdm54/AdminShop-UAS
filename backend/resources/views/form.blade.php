@@ -17,8 +17,8 @@
         <div class="login-container bg-white p-8 rounded-lg shadow-md text-center w-96">
             <form id="form-input">
                 @csrf
-                <x-input-component id="username-input" name="username" label="Username" type="text" placeholder="Enter your username"></x-input-component>
-                <x-input-component id="password-input" name="password" label="Password" type="password" placeholder="Enter your password"></x-input-component>
+                <x-input-component id="username-input" name="username" label="Username" type="text" placeholder="Enter your username" ></x-input-component>
+                <x-input-component id="password-input" name="password" label="Password" type="password" placeholder="Enter your password" ></x-input-component>
                 <div class="options flex justify-between text-xs mb-4">
                     {{-- <label>
                         <input type="checkbox" name="remember">

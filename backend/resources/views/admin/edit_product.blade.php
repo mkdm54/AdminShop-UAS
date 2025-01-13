@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Product</title>
-    @vite('resources/css/admin.css')
+    <title>Edit Product Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    @vite('resources/css/admin.css')
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
 
@@ -58,13 +58,27 @@
 
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
-                <h1 class="text-3xl text-black pb-6">Products</h1>
-                <p class="text-xl pb-3 flex items-center">
-                    <i class="fas fa-list mr-3"></i> Products
-                </p>
-                <x-product-table :products="$products"></x-product-table>
+                <h1 class="w-full text-3xl text-black pb-6">Edit Product</h1>
+                <div class="flex flex-col items-center gap-4">
+                    <p class="text-xl pb-3 flex items-center">
+                        <i class="fas fa-list mr-3"></i> Edit
+                    </p>
+                    <x-alert-message></x-alert-message>
+                    <div class="login-container bg-white p-8 rounded-lg shadow-md text-center w-96">
+                        <form method="POST" action="{{ route('admin.update', ['admin' => $product->id]) }}">
+                            @csrf
+                            @method('PUT')
+                            <x-input-component id="product_name" name="product_name" label="Add Product" type="text" placeholder="Enter your product" value="{{ $product->product_name }}"></x-input-component>
+                            <x-input-component id="price" name="price" label="Price" type="text" placeholder="Enter your price" value="{{ $product->price }}"></x-input-component>
+                            <x-input-component id="description" name="description" label="Description" type="text" placeholder="Description" value="{{ $product->description }}"></x-input-component>
+                            <x-input-component id="quantity" name="quantity" label="Quantity" type="text" placeholder="Quantity" value="{{ $product->quantity }}"></x-input-component>
+                            <x-button title="Add Product" type="submit">Save</x-button>
+                        </form>
+                    </div>
+                </div>
             </main>
         </div>
+
     </div>
 
     <!-- AlpineJS -->
