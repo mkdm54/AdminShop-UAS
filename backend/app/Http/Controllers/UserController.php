@@ -15,7 +15,7 @@ class UserController
     {
         $username = Auth::user()->username;
         $products = Product::all();
-        return view('user.dashboard', compact('products'));
+        return view('user.dashboard', compact('products', 'username'));
     }
 
     /**
