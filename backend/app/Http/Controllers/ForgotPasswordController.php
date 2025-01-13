@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Mockery\Generator\StringManipulation\Pass\Pass;
+use Illuminate\Support\Facades\Log;
 
 class ForgotPasswordController
 {
@@ -20,10 +20,13 @@ class ForgotPasswordController
         ]);
 
         $status = Password::sendResetLink($request->only('email'));
+        Log::info('Email yang dikirim: ' . json_encode($status)); // Tambahkan log untuk melihat email yang dikirim
 
-        return $status === Password::RESET_LINK_SENT ?
-            back()->with(['status' => __($status)]) :
-            back()->withErrors(['status' => __($status)]);
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(['status' => __($status), 'success' => 'Link reset password telah dikirim ke email Anda.'], 200);
+        } else {
+            return response()->json(['status' => __($status), 'error' => 'Email tidak ditemukan.', 'redirect' => route('password.request')], 422);
+        }
     }
 
     public function showResetPasswordForm($token)
@@ -47,8 +50,10 @@ class ForgotPasswordController
             }
         );
 
-        return $status = Password::PASSWORD_RESET ?
-            redirect()->route('home')->with('status', __($status)) :
-            back()->withErrors(['email' => [__($status)]]);
+        if ($status === Password::PASSWORD_RESET) {
+            return response()->json(['status' => __($status), 'success' => 'Password berhasil direset.', 'redirect' => route('home')], 200);
+        } else {
+            return response()->json(['status' => __($status), 'error' => 'Gagal mereset password.'], 422);
+        }
     }
 }

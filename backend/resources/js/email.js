@@ -1,4 +1,5 @@
-// untuk view form.blade.php
+
+// email.blade.php
 function showAlert(type, message, label) {
     const alertIcon = document.getElementById('aler-icon');
     const alertLabel = document.getElementById('alert-label');
@@ -32,55 +33,45 @@ function showAlert(type, message, label) {
     }, 4000);
 };
 
-document.getElementById('form-input').addEventListener('submit', function (event) {
+document.getElementById('reset-password-form').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    showAlert('info', 'Sedang memproses...', 'Waiting...');
 
-    showAlert('info', 'Sedang memproses...', 'Proses Login');
-
-    const username = document.getElementById('username-input').value;
-    const password = document.getElementById('password-input').value;
+    const email = document.getElementById('email-input').value;
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch('/login', {
+    fetch('/forgot-password', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': CSRF_TOKEN,
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email })
     })
-        .then(response => {
+        .then(response => response.json().then(data => {
             if (!response.ok) {
-                return response.json().then(data => {
-                    throw new Error(data.error || 'Network response was not ok');
-                });
+                throw new Error(data.error || 'Network response was not ok');
             }
-            return response.json();
-        })
+            return data;
+        }))
         .then(data => {
-            //hapus pesan loading ketika selesai
+            // Hapus pesan loading ketika selesai
             document.getElementById('alert-container').style.display = 'none';
 
-            if (data.error) {
-                showAlert('error', data.error, 'Error');
-                setTimeout(() => {
-                    window.location.href = data.redirect;
-                }, 4000); // Tunda redirect
-
-            } else {
+            if (data.success) {
                 showAlert('success', data.success, 'Success');
-                setTimeout(() => {
-                    window.location.href = data.redirect;
-                }, 4000); // Tunda redirect
-
-            }
-        }).catch((error) => {
-            if (error.message) {
-                showAlert('error', error.message, 'Error');
-            }
-            else {
-                showAlert('error', 'Terjadi kesalahan server.', 'Error');
+                if (data.redirect) {
+                    setTimeout(() => {
+                        window.location.href = data.redirect;
+                    }, 3000);
+                }
+            } else {
+                showAlert('error', data.error, 'Error');
             }
         })
+        .catch((error) => {
+            document.getElementById('alert-container').style.display = 'none'; // Pastikan pesan loading dihapus saat terjadi error
+            showAlert('error', error.message, 'Error');
+        });
 });
