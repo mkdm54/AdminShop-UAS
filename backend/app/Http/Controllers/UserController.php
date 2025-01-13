@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController
@@ -63,6 +64,8 @@ class UserController
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('route');
     }
 }
