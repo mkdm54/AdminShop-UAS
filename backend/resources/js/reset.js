@@ -37,18 +37,21 @@ document.getElementById('form-reset').addEventListener('submit', function (event
 
     showAlert('info', 'Sedang memproses...', 'Reset');
 
-    const email = document.getElementsByName('email')[0].value;
-    const password = document.getElementsByName('password')[0].value;
-    const passwordConfirmation = document.getElementsByName('password_confirmation')[0].value;
+    const email = document.querySelector('[name="email"]').value;
+    const password = document.querySelector('[name="password"]').value;
+    const passwordConfirmation = document.querySelector('[name="password_confirmation"]').value;
+    const token = document.querySelector('[name="token"]').value;
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     fetch('/password/reset', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'X-CSRF-TOKEN': CSRF_TOKEN,
         },
         body: JSON.stringify({
+            'token' : token,
             'email': email,
             'password': password,
             'password_confirmation': passwordConfirmation

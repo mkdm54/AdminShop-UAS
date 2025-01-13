@@ -36,24 +36,42 @@ class ForgotPasswordController
 
     public function resetPassword(Request $request)
     {
-        $request->validate([
-            'token' => 'required',
-            'email' => ['required', 'email'],
-            'password' => ['bail', 'required', 'string', 'min:6', 'confirmed']
-        ]);
+        try {
+            $request->validate([
+                'token' => 'required',
+                'email' => ['required', 'email'],
+                'password' => ['required', 'string', 'min:6', 'confirmed']
+            ]);
 
-        $status = Password::reset(
-            $request->only('token', 'email', 'password_confirmation', 'password'),
-            function ($user, $password) {
-                $user->password = bcrypt($password);
-                $user->save();
+            $status = Password::reset(
+                $request->only('email', 'password', 'password_confirmation', 'token'),
+                function ($user, $password) {
+                    $user->password = bcrypt($password);
+                    $user->save();
+                }
+            );
+
+            if ($status === Password::PASSWORD_RESET) {
+                return response()->json([
+                    'success' => 'Password berhasil direset.',
+                    'redirect' => route('home')
+                ]);
             }
-        );
 
-        if ($status === Password::PASSWORD_RESET) {
-            return response()->json(['status' => __($status), 'success' => 'Password berhasil direset.', 'redirect' => route('home')], 200);
-        } else {
-            return response()->json(['status' => __($status), 'error' => 'Gagal mereset password.', 'redirect' => route('home')], 422);
+            return response()->json([
+                'error' => __($status),
+                'redirect' => route('password.reset', ['token' => $request->token])
+            ], 422);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'error' => $e->errors()['email'][0] ?? $e->errors()['password'][0] ?? 'Validation error',
+                'redirect' => route('password.reset', ['token' => $request->token])
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan server.',
+                'redirect' => route('password.reset', ['token' => $request->token])
+            ], 500);
         }
     }
 }
