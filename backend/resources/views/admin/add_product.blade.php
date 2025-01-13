@@ -61,7 +61,7 @@
                 <h1 class="w-full text-3xl text-black pb-6">Add Product</h1>
                 <div class="flex flex-col items-center gap-4">
                     <p class="text-xl pb-3 flex items-center">
-                        <i class="fas fa-list mr-3"></i> Product
+                        <i class="fas fa-list mr-3"></i> Add
                     </p>
                     <x-alert-message></x-alert-message>
                     <div class="login-container bg-white p-8 rounded-lg shadow-md text-center w-96">
