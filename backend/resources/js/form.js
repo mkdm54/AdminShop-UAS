@@ -34,7 +34,7 @@ function showAlert(type, message, label) {
 
 document.getElementById('form-input').addEventListener('submit', function (event) {
     event.preventDefault();
-    
+
 
     showAlert('info', 'Sedang memproses...', 'Proses Login');
 
@@ -52,7 +52,9 @@ document.getElementById('form-input').addEventListener('submit', function (event
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+                return response.json().then(data => {
+                    throw new Error(data.error || 'Network response was not ok');
+                });
             }
             return response.json();
         })
@@ -65,15 +67,20 @@ document.getElementById('form-input').addEventListener('submit', function (event
                 setTimeout(() => {
                     window.location.href = data.redirect;
                 }, 4000); // Tunda redirect
-                
+
             } else {
                 showAlert('success', data.success, 'Success');
                 setTimeout(() => {
                     window.location.href = data.redirect;
                 }, 4000); // Tunda redirect
-                
+
             }
-        }).catch(() => {
-            showAlert('error', 'Terjadi kesalahan server.', 'Error');
+        }).catch((error) => {
+            if (error.message) {
+                showAlert('error', error.message, 'Error');
+            }
+            else {
+                showAlert('error', 'Terjadi kesalahan server.', 'Error');
+            }
         })
 });
