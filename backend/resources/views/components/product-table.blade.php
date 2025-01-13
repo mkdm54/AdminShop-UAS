@@ -104,7 +104,7 @@
                         <div
                             class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30">
                             <span class="relative top-2 -left-3 transform -translate-y-1/2 -translate-x-1/2" title="Edit">
-                                <a href=""><i class="fa-solid fa-pencil text-green-500 text-lg"></i></a>
+                                <a href="{{ route('admin.edit', ['admin' => $product->id]) }}"><i class="fa-solid fa-pencil text-green-500 text-lg"></i></a>
                             </span>
 
                             <form action="{{ route('admin.destroy', ['admin' => $product]) }}" method="POST">
