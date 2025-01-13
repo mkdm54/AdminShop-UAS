@@ -4,6 +4,7 @@
     <table class="mt-4 w-full min-w-max table-auto text-left border">
         <thead class="bg-blue-500">
             <tr>
+                
                 <th class="cursor-pointer border border-gray-400 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
                     <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">
                         Product
@@ -77,11 +78,11 @@
                         </div>
                     </td>
                     <td class="p-4 border border-gray-400">
-                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ $product->created_at }}</p>
+                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ \Carbon\Carbon::parse($product->created_at)->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}</p>
                     </td>
 
                     <td class="p-4 border border-gray-400">
-                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ $product->updated_at }}</p>
+                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ \Carbon\Carbon::parse($product->update_at)->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}</p>
                     </td>
 
                     <td class="p-4 border border-gray-400">
