@@ -53,7 +53,7 @@ class ForgotPasswordController
         if ($status === Password::PASSWORD_RESET) {
             return response()->json(['status' => __($status), 'success' => 'Password berhasil direset.', 'redirect' => route('home')], 200);
         } else {
-            return response()->json(['status' => __($status), 'error' => 'Gagal mereset password.'], 422);
+            return response()->json(['status' => __($status), 'error' => 'Gagal mereset password.', 'redirect' => route('home')], 422);
         }
     }
 }
