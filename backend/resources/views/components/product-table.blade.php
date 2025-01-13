@@ -36,6 +36,12 @@
                 </th>
                 <th class="cursor-pointer border border-gray-400 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
                     <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">
+                        Date Updated
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4"></svg>
+                    </p>
+                </th>
+                <th class="cursor-pointer border border-gray-400 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+                    <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">
                         Actions
                     </p>
                 </th>
@@ -72,6 +78,10 @@
                     </td>
                     <td class="p-4 border border-gray-400">
                         <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ $product->created_at }}</p>
+                    </td>
+
+                    <td class="p-4 border border-gray-400">
+                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ $product->updated_at }}</p>
                     </td>
 
                     <td class="p-4 border border-gray-400">
