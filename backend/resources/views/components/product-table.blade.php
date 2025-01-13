@@ -94,7 +94,7 @@
                     </td>
 
                     <td class="p-4 border border-gray-400">
-                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ \Carbon\Carbon::parse($product->update_at)->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}</p>
+                        <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">{{ \Carbon\Carbon::parse($product->updated_at)->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}</p>
                     </td>
 
                     <td class="p-4 border border-gray-400">
