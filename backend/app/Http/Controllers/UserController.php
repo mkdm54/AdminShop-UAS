@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class UserController
 {
@@ -12,6 +13,7 @@ class UserController
      */
     public function index()
     {
+        $username = Auth::user()->username;
         $products = Product::all();
         return view('user.dashboard', compact('products'));
     }
