@@ -24,7 +24,7 @@
     </div>
 
     <!-- Tanggal produk ditambahkan -->
-    <p class="text-gray-400 text-xs text-right">Ditambahkan: {{ $product->created_at }}</p>
+    <p class="text-gray-400 text-xs text-right">Ditambahkan: {{ \Carbon\Carbon::parse($product->created_at)->timezone('Asia/Jakarta')->format('Y-m-d H:i:s') }}</p>
 
     <!-- Hover animasi dekoratif -->
     <div
