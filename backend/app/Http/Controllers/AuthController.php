@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,23 +62,38 @@ class AuthController
 
     public function registerAccount(Request $request)
     {
-        $request->validate([
-            'username' => ['required', 'string', 'min:4', 'max:50', 'unique:users,username'],
-            'password' => ['required', 'string', 'min:6'],
-        ]);
-
-        $defaulteEmail = $request->input('username') . '@gmail.com';
-
-        $user = new \App\Models\User();
-        $user->username = $request->input('username');
-        $user->email =  $defaulteEmail;
-        $user->password = bcrypt($request->input('password'));
-        $user->save();
-
-        return response()->json([
-            'message' => 'Akun berhasil dibuat',
-            'redirect' => route('home')
-        ], 200);
+        try {
+            $request->validate([
+                'username' => ['required', 'string', 'min:4', 'max:50', 'unique:users,username'],
+                'password' => ['required', 'string', 'min:6'],
+            ], [
+                'username.unique' => 'Username sudah digunakan',
+            ]);
+    
+            $defaultEmail = $request->input('username') . '@gmail.com';
+    
+            $user = new \App\Models\User();
+            $user->username = $request->input('username');
+            $user->email =  $defaultEmail;
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+    
+            return response()->json([
+                'success' => 'Akun berhasil dibuat',
+                'redirect' => route('home')
+            ]);
+    
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'error' => $e->errors()['username'][0],
+                'redirect' => route('register.form')
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan server',
+                'redirect' => route('register.form')
+            ], 500);
+        }
     }
 
     public function logout(Request $request)
