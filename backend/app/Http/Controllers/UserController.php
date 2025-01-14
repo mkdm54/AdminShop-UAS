@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController
 {
@@ -11,7 +14,9 @@ class UserController
      */
     public function index()
     {
-        return view('user.dashboard');
+        $username = Auth::user()->username;
+        $products = Product::all();
+        return view('user.dashboard', compact('products', 'username'));
     }
 
     /**
@@ -59,6 +64,8 @@ class UserController
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('home');
     }
 }

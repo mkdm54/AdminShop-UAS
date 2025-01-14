@@ -102,6 +102,6 @@ class AdminController
     {
         $product =  Product::findOrFail($id);
         $product->delete();
-        return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil dihapus');
+        return redirect()->route('admin.products')->with('success', 'Product ' . $product->product_name . ' berhasil dihapus');
     }
 }
