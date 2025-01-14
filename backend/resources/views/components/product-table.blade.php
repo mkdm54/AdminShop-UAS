@@ -106,7 +106,7 @@
                             <form action="{{ route('admin.destroy', ['admin' => $product]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="relative left-6 transform -translate-y-1/2 -translate-x-1/2" title="Delete" type="submit"><i class="fa-solid fa-trash text-red-500 text-lg"></i></button>
+                                <button class="relative left-5 transform -translate-y-5 -translate-x-1/2" title="Delete" type="submit"><i class="fa-solid fa-trash text-red-500 text-lg"></i></button>
                             </form>
                         </div>
                     </td>
