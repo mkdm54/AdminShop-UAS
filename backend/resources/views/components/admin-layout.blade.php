@@ -27,14 +27,12 @@
         }
 
         .active-nav-link {
-            --tw-bg-opacity: 1;
-            background-color: rgb(234 88 12 / var(--tw-bg-opacity, 1))
-                /* #ea580c */
-            ;
+            background-color: rgb(255, 255, 255)
         }
 
         .nav-item:hover {
-            background-color: white ;
+            background-color: white;
+            color: #ea580c;
         }
 
         .account-link:hover {
