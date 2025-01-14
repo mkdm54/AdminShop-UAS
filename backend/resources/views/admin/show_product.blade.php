@@ -9,37 +9,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
-
         .font-family-karla {
             font-family: karla;
         }
 
         .bg-sidebar {
-            background: #3d68ff;
-        }
-
-        .cta-btn {
-            color: #3d68ff;
-        }
-
-        .upgrade-btn {
-            background: #1947ee;
-        }
-
-        .upgrade-btn:hover {
-            background: #0038fd;
+            --tw-bg-opacity: 1;
+            background-color: rgb(234 88 12 / var(--tw-bg-opacity, 1))
+                /* #ea580c */
+            ;
         }
 
         .active-nav-link {
-            background: #1947ee;
+            --tw-bg-opacity: 1;
+            background-color: rgb(234 88 12 / var(--tw-bg-opacity, 1))
+                /* #ea580c */
+            ;
         }
 
         .nav-item:hover {
-            background: #1947ee;
+            background-color: white ;
         }
 
         .account-link:hover {
-            background: #3d68ff;
+            background-color: red;
         }
     </style>
 </head>
