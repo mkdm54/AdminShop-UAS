@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class ForgotPasswordController
 {
@@ -42,6 +43,14 @@ class ForgotPasswordController
                 'email' => ['required', 'email'],
                 'password' => ['required', 'string', 'min:6', 'confirmed']
             ]);
+
+
+            $user = \App\Models\User::where('email', $request->email)->first();
+            if (Hash::check($request->password, $user->password)) { 
+                return response()->json([
+                    'error' => 'Kata sandi baru tidak boleh sama dengan kata sandi lama.', 
+                    'redirect' => route('password.reset', ['token' => $request->token])
+                ], 422); }
 
             $status = Password::reset(
                 $request->only('email', 'password', 'password_confirmation', 'token'),
