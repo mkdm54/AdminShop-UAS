@@ -37,6 +37,7 @@ class AuthController
         }
 
         $user = Auth::user();
+        $request->session()->regenerate();
 
         if ($user->role === 'admin') {
             return response()->json([
