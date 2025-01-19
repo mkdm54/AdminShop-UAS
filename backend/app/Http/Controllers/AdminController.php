@@ -51,7 +51,7 @@ class AdminController
 
         $products = Product::create($validatedData);
 
-        return redirect()->route('admin.index')->with('success', 'Product ' . $products->product_name . ' berhasil ditambahkan');
+        return redirect()->route('admin.products')->with('success', 'Product ' . $products->product_name . ' berhasil ditambahkan');
     }
 
     /**
@@ -68,8 +68,9 @@ class AdminController
      */
     public function edit(string $id)
     {
+        $username = Auth::user()->username;
         $product = Product::findOrFail($id);
-        return view('admin.edit', compact('product'));
+        return view('admin.edit_product', compact('product', 'username'));
     }
 
     /**
@@ -91,7 +92,7 @@ class AdminController
         $product = Product::findOrFail($id);
         $product->update($validatedData);
 
-        return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil diperbarui');
+        return redirect()->route('admin.products')->with('success', 'Product ' . $product->product_name . ' berhasil diperbarui');
     }
 
     /**
@@ -101,6 +102,6 @@ class AdminController
     {
         $product =  Product::findOrFail($id);
         $product->delete();
-        return redirect()->route('admin.index')->with('success', 'Product ' . $product->product_name . ' berhasil dihapus');
+        return redirect()->route('admin.products')->with('success', 'Product ' . $product->product_name . ' berhasil dihapus');
     }
 }

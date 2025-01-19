@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Mockery\Generator\StringManipulation\Pass\Pass;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class ForgotPasswordController
 {
@@ -20,10 +21,13 @@ class ForgotPasswordController
         ]);
 
         $status = Password::sendResetLink($request->only('email'));
+        Log::info('Email yang dikirim: ' . json_encode($status)); // Tambahkan log untuk melihat email yang dikirim
 
-        return $status === Password::RESET_LINK_SENT ?
-            back()->with(['status' => __($status)]) :
-            back()->withErrors(['status' => __($status)]);
+        if ($status === Password::RESET_LINK_SENT) {
+            return response()->json(['status' => __($status), 'success' => 'Link reset password telah dikirim ke email Anda.'], 200);
+        } else {
+            return response()->json(['status' => __($status), 'error' => 'Email tidak ditemukan.', 'redirect' => route('password.request')], 422);
+        }
     }
 
     public function showResetPasswordForm($token)
@@ -33,22 +37,50 @@ class ForgotPasswordController
 
     public function resetPassword(Request $request)
     {
-        $request->validate([
-            'token' => 'required',
-            'email' => ['required', 'email'],
-            'password' => ['bail', 'required', 'string', 'min:6', 'confirmed']
-        ]);
+        try {
+            $request->validate([
+                'token' => 'required',
+                'email' => ['required', 'email'],
+                'password' => ['required', 'string', 'min:6', 'confirmed']
+            ]);
 
-        $status = Password::reset(
-            $request->only('token', 'email', 'password_confirmation', 'password'),
-            function ($user, $password) {
-                $user->password = bcrypt($password);
-                $user->save();
+
+            $user = \App\Models\User::where('email', $request->email)->first();
+            if (Hash::check($request->password, $user->password)) { 
+                return response()->json([
+                    'error' => 'Kata sandi baru tidak boleh sama dengan kata sandi lama.', 
+                    'redirect' => route('password.reset', ['token' => $request->token])
+                ], 422); }
+
+            $status = Password::reset(
+                $request->only('email', 'password', 'password_confirmation', 'token'),
+                function ($user, $password) {
+                    $user->password = bcrypt($password);
+                    $user->save();
+                }
+            );
+
+            if ($status === Password::PASSWORD_RESET) {
+                return response()->json([
+                    'success' => 'Password berhasil direset.',
+                    'redirect' => route('home')
+                ]);
             }
-        );
 
-        return $status = Password::PASSWORD_RESET ?
-            redirect()->route('home')->with('status', __($status)) :
-            back()->withErrors(['email' => [__($status)]]);
+            return response()->json([
+                'error' => __($status),
+                'redirect' => route('password.reset', ['token' => $request->token])
+            ], 422);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'error' => $e->errors()['email'][0] ?? $e->errors()['password'][0] ?? 'Validation error',
+                'redirect' => route('password.reset', ['token' => $request->token])
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Terjadi kesalahan server.',
+                'redirect' => route('password.reset', ['token' => $request->token])
+            ], 500);
+        }
     }
 }

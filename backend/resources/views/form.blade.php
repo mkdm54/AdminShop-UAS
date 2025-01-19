@@ -11,14 +11,14 @@
     <title>Login Page</title>
 </head>
 
-<body class="bg-indigo-500 flex justify-center items-center h-screen m-0">
+<body class="bg-orange-600 flex justify-center items-center h-screen m-0">
     <div class="flex flex-col items-center gap-4">
         <x-alert-message></x-alert-message>
         <div class="login-container bg-white p-8 rounded-lg shadow-md text-center w-96">
             <form id="form-input">
                 @csrf
-                <x-input-component id="username-input" name="username" label="Username" type="text" placeholder="Enter your username"></x-input-component>
-                <x-input-component id="password-input" name="password" label="Password" type="password" placeholder="Enter your password"></x-input-component>
+                <x-input-component id="username-input" name="username" label="Username" type="text" placeholder="Enter your username" ></x-input-component>
+                <x-input-component id="password-input" name="password" label="Password" type="password" placeholder="Enter your password" ></x-input-component>
                 <div class="options flex justify-between text-xs mb-4">
                     {{-- <label>
                         <input type="checkbox" name="remember">

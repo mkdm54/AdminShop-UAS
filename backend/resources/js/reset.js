@@ -1,22 +1,29 @@
 import showAlert from "./showAlert";
 
-document.getElementById('form-input').addEventListener('submit', function (event) {
+document.getElementById('form-reset').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    showAlert('info', 'Sedang memproses...', 'Reset');
 
-    showAlert('info', 'Sedang memproses...', 'Proses Login');
-
-    const username = document.getElementById('username-input').value;
-    const password = document.getElementById('password-input').value;
+    const email = document.querySelector('[name="email"]').value;
+    const password = document.querySelector('[name="password"]').value;
+    const passwordConfirmation = document.querySelector('[name="password_confirmation"]').value;
+    const token = document.querySelector('[name="token"]').value;
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch('/login', {
+    fetch('/password/reset', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'X-CSRF-TOKEN': CSRF_TOKEN,
         },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({
+            'token' : token,
+            'email': email,
+            'password': password,
+            'password_confirmation': passwordConfirmation
+        })
     })
         .then(response => {
             if (!response.ok) {
@@ -45,6 +52,7 @@ document.getElementById('form-input').addEventListener('submit', function (event
             }
         }).catch((error) => {
             if (error.message) {
+                console.log(error.message)
                 showAlert('error', error.message, 'Error');
             }
             else {

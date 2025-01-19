@@ -1,19 +1,30 @@
 import showAlert from "./showAlert";
 
-document.getElementById('form-input').addEventListener('submit', function (event) {
+
+document.getElementById('register-account').addEventListener('submit', function (event) {
     event.preventDefault();
 
+    showAlert('info', 'Sedang memproses...', 'Create');
 
-    showAlert('info', 'Sedang memproses...', 'Proses Login');
-
-    const username = document.getElementById('username-input').value;
-    const password = document.getElementById('password-input').value;
+    const username = document.getElementById('create-username-input').value;
+    const password = document.getElementById('create-password-input').value;
     const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    fetch('/login', {
+    // Validasi input sisi klien
+    if (!username || username.length < 4 || username.length > 50) {
+        showAlert('error', 'Username harus memiliki panjang antara 4-50 karakter.', 'Validasi Gagal');
+        return;
+    }
+    if (!password || password.length < 6) {
+        showAlert('error', 'Password harus memiliki minimal 6 karakter.', 'Validasi Gagal');
+        return;
+    }
+
+    fetch('/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            
             'X-CSRF-TOKEN': CSRF_TOKEN,
         },
         body: JSON.stringify({ username, password })
@@ -45,6 +56,7 @@ document.getElementById('form-input').addEventListener('submit', function (event
             }
         }).catch((error) => {
             if (error.message) {
+                console.log(error.message)
                 showAlert('error', error.message, 'Error');
             }
             else {

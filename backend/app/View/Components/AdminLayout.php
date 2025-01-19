@@ -6,15 +6,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProductTable extends Component
+class AdminLayout extends Component
 {
-    
+    public $title;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($title)
     {
-        
+        $this->title =$title;
     }
 
     /**
@@ -22,6 +22,6 @@ class ProductTable extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.product-table');
+        return view('components.admin-layout');
     }
 }
