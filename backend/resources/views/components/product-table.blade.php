@@ -1,6 +1,10 @@
 @props(['products'])
 
 <div class="p-6 px-0">
+    {{-- *search-bar --}}
+    <x-search-bar :id="'search-product'" :placeholder="'Search for products...'"></x-search-bar>
+
+    {{-- *product-table --}}
     <table class="mt-4 w-full min-w-max table-auto text-left border">
         <thead class="bg-blue-500">
             <tr>
