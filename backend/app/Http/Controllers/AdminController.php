@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,23 @@ class AdminController
         $username = Auth::user()->username;
         $products =  Product::all();
         return view('admin.show_product', compact('username', 'products'));
+    }
+
+    public function searchProduct(Request $request): JsonResponse
+    {
+        $searchProduct =  $request->input('seacrh');
+
+        $result = Product::where('product_name', 'LIKE', '%' . $searchProduct . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchProduct . '%')
+            ->get();
+
+        if ($result->isEmpty()) {
+            return response()->json([
+                'message' => 'No products found'
+            ], 404);
+        }
+
+        return response()->json($result);
     }
 
     /**
