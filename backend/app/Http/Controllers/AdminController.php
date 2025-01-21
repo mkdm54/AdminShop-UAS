@@ -27,6 +27,10 @@ class AdminController
 
     public function searchProduct(Request $request): JsonResponse
     {
+        $request->validate([
+            'search' => 'required'
+        ]);
+
         $searchProduct =  $request->input('search');
 
         $result = Product::where('product_name', 'LIKE', '%' . $searchProduct . '%')
