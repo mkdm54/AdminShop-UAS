@@ -1,4 +1,4 @@
-@props(['username'])
+@props(['username', 'javascript'])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    @if ($javascript)
+        @vite('resources/js/admin/'.$javascript.'.js')
+    @endif
     @vite('resources/css/admin.css')
 
     <!-- Tailwind -->
