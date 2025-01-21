@@ -27,7 +27,7 @@ class AdminController
 
     public function searchProduct(Request $request): JsonResponse
     {
-        $searchProduct =  $request->input('seacrh');
+        $searchProduct =  $request->input('search');
 
         $result = Product::where('product_name', 'LIKE', '%' . $searchProduct . '%')
             ->orWhere('description', 'LIKE', '%' . $searchProduct . '%')
