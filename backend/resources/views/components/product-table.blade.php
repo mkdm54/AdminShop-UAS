@@ -59,7 +59,7 @@
         </thead>
         <tbody>
             @foreach ($products as $product)
-                <tr>
+                <tr class="product-row">
                     <td class="p-4 border border-gray-400">
                         <div class="flex items-center gap-3">
                             <div class="flex flex-col">
