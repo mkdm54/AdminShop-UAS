@@ -8,5 +8,5 @@
     </div>
     <!-- Input Field -->
     <input id="{{ $id }}" name="{{ $name }}" type="text" placeholder="{{ $placeholder }}"
-        class="w-full pl-12 pr-4 py-3 text-sm border-2 border-gray-300 focus:outline-none focus:border-orange-600  transition duration-300">
+        class="w-full pl-12 pr-4 py-3 text-sm border-2 border-gray-300 focus:outline-none focus:border-orange-600  transition duration-300" required>
 </div>
