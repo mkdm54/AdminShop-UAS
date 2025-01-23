@@ -27,6 +27,8 @@ Route::middleware(['isAdmin'])->group(function () {
     // custom
     Route::get('/admin/products', [AdminController::class, 'showAllProducts'])->name('admin.products');
     Route::post('/search-product', [AdminController::class, 'searchProduct']);
+    Route::get('/admin/regular-users', [AdminController::class, 'showRegularUsers'])->name('admin.showRegularUsers');
+
     Route::resource('admin', AdminController::class);
 });
 
