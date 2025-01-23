@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthController
 {
@@ -37,18 +38,31 @@ class AuthController
         }
 
         $user = Auth::user();
-        $request->session()->regenerate();
+        if ($user instanceof User) {
+            $user->is_active = true;
+            $user->save();
+            $request->session()->regenerate();
 
-        if ($user->role === 'admin') {
+            if ($user->role === 'admin') {
+                return response()->json([
+                    'success' => 'Login berhasil sebagai Admin.',
+                    'redirect' => route('admin.index'),
+                ]);
+            } elseif ($user->role === 'user') {
+                return response()->json([
+                    'success' => 'Login berhasil sebagai User.',
+                    'redirect' => route('user.index'),
+                ]);
+            }
+
             return response()->json([
-                'success' => 'Login berhasil sebagai Admin.',
-                'redirect' => route('admin.index'),
-            ]);
-        } elseif ($user->role === 'user') {
+                'error' => 'Terjadi kesalahan tidak terduga.'
+            ], 500);
+        } else {
             return response()->json([
-                'success' => 'Login berhasil sebagai User.',
-                'redirect' => route('user.index'),
-            ]);
+                'error' => 'Autentikasi gagal',
+                'redirect' => route('home'),
+            ], 500);
         }
 
         return response()->json([
@@ -70,20 +84,19 @@ class AuthController
             ], [
                 'username.unique' => 'Username sudah digunakan',
             ]);
-    
+
             $defaultEmail = $request->input('username') . '@gmail.com';
-    
+
             $user = new \App\Models\User();
             $user->username = $request->input('username');
             $user->email =  $defaultEmail;
             $user->password = bcrypt($request->input('password'));
             $user->save();
-    
+
             return response()->json([
                 'success' => 'Akun berhasil dibuat',
                 'redirect' => route('home')
             ]);
-    
         } catch (\Illuminate\Validation\ValidationException $e) {
             return response()->json([
                 'error' => $e->errors()['username'][0],
@@ -99,6 +112,11 @@ class AuthController
 
     public function logout(Request $request)
     {
+        $user = Auth::user();
+        if ($user instanceof User) {
+            $user->is_active = false;
+            $user->save();
+        }
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
