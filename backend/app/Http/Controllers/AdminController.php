@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminController
 {
@@ -23,6 +24,11 @@ class AdminController
         $username = Auth::user()->username;
         $products =  Product::all();
         return view('admin.show_product', compact('username', 'products'));
+    }
+
+    public function showRegularUsers() {
+        $regularUsers = User::where('role', '!=', 'admin')->get();
+        return view('admin.regular-users', ['users' => $regularUsers]);
     }
 
     public function searchProduct(Request $request): JsonResponse
