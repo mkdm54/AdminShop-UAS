@@ -8,6 +8,10 @@
             <i class="fa-solid fa-house mr-3"></i>
             Dashboard
         </a>
+        <a href="{{ route('admin.index') }}" class="flex items-center {{ request()->routeIs('admin.index') ? 'active-nav-link' : '' }}  hover:text-orange-600 py-4 pl-6 nav-item">
+            <i class="fa-solid fa-house mr-3"></i>
+            Users
+        </a>
         <a href="{{ route('admin.create') }}" class="flex items-center {{ request()->routeIs('admin.create') ? 'active-nav-link' : '' }}  hover:text-orange-600  hover:opacity-100 py-4 pl-6 nav-item">
             <i class="fas fa-align-left mr-3"></i>
             Add Product
