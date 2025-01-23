@@ -1,4 +1,4 @@
-@props(['username', 'javascript'])
+@props(['username', 'javascript' => null])
 
 <!DOCTYPE html>
 <html lang="en">
