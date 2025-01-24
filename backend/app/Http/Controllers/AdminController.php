@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminController
 {
@@ -22,6 +24,33 @@ class AdminController
         $username = Auth::user()->username;
         $products =  Product::all();
         return view('admin.show_product', compact('username', 'products'));
+    }
+
+    public function showRegularUsers() {
+        $username = Auth::user()->username;
+        $regularUsers = User::where('role', '!=', 'admin')->get();
+        return view('admin.regular_users', compact('username', 'regularUsers'));
+    }
+
+    public function searchProduct(Request $request): JsonResponse
+    {
+        $request->validate([
+            'search' => 'required'
+        ]);
+
+        $searchProduct =  $request->input('search');
+
+        $result = Product::where('product_name', 'LIKE', '%' . $searchProduct . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchProduct . '%')
+            ->get();
+
+        if ($result->isEmpty()) {
+            return response()->json([
+                'message' => 'No products found'
+            ], 404);
+        }
+
+        return response()->json($result);
     }
 
     /**

@@ -1,4 +1,4 @@
-<x-admin-layout :username="$username" title="Add Product">
+<x-admin-layout :username="$username" :lable="'Add Product'" :title="'Add Product Page'" :javascript="'add_product'">
     <div class="flex flex-col items-center gap-4">
         <p class="text-xl pb-3 flex items-center">
             <i class="fas fa-list mr-3"></i> Add
