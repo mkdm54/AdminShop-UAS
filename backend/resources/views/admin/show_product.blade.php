@@ -1,5 +1,5 @@
 
-<x-admin-layout :username="$username" title="Products Page" :javascript="'show_product'">
+<x-admin-layout :username="$username" :lable="'Products Page'" :title="'Products Page'" :javascript="'show_product'">
     <p class="text-xl pb-3 flex items-center">
         <i class="fas fa-list mr-3"></i> Products
     </p>

@@ -1,4 +1,4 @@
-<x-admin-layout :username="$username" title="Edit Product Page">
+<x-admin-layout :username="$username" :lable="'Edit Product'" :title="'Edit Product Page'">
     <div class="flex flex-col items-center gap-4">
         <p class="text-xl pb-3 flex items-center">
             <i class="fas fa-list mr-3"></i> Edit

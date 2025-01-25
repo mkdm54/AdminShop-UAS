@@ -27,8 +27,9 @@ class AdminController
     }
 
     public function showRegularUsers() {
+        $username = Auth::user()->username;
         $regularUsers = User::where('role', '!=', 'admin')->get();
-        return view('admin.regular-users', ['users' => $regularUsers]);
+        return view('admin.regular_users', compact('username', 'regularUsers'));
     }
 
     public function searchProduct(Request $request): JsonResponse
