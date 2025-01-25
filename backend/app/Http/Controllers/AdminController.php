@@ -34,9 +34,11 @@ class AdminController
         return view('admin.regular_users', compact('username', 'regularUsers'));
     }
 
-    public function delete_user(string $id) {
+    public function deleteAccount(string $id)
+    {
         $user = User::findOrFail($id);
         $user->delete();
+        return redirect()->route('admin.showRegularUsers');
     }
 
     public function searchProduct(Request $request): JsonResponse
