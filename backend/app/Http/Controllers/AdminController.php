@@ -16,21 +16,25 @@ class AdminController
     public function index()
     {
         $username = Auth::user()->username;
+        session()->put('username', $username);
         return view('admin.dashboard', compact('username'));
     }
 
     public function showAllProducts()
     {
-        $username = Auth::user()->username;
-        $products =  Product::all();
+        $username = session('username');
+        $products = Product::all();
         return view('admin.show_product', compact('username', 'products'));
     }
 
-    public function showRegularUsers() {
-        $username = Auth::user()->username;
+    public function showRegularUsers()
+    {
+        $username = session('username');
         $regularUsers = User::where('role', '!=', 'admin')->get();
         return view('admin.regular_users', compact('username', 'regularUsers'));
     }
+
+    
 
     public function searchProduct(Request $request): JsonResponse
     {
@@ -58,7 +62,7 @@ class AdminController
      */
     public function create()
     {
-        $username = Auth::user()->username;
+        $username = session('username');
         return view('admin.add_product', compact('username'));
     }
 
@@ -97,7 +101,7 @@ class AdminController
      */
     public function edit(string $id)
     {
-        $username = Auth::user()->username;
+        $username = session('username');
         $product = Product::findOrFail($id);
         return view('admin.edit_product', compact('product', 'username'));
     }
