@@ -34,7 +34,10 @@ class AdminController
         return view('admin.regular_users', compact('username', 'regularUsers'));
     }
 
-    
+    public function delete_user(string $id) {
+        $user = User::findOrFail($id);
+        $user->delete();
+    }
 
     public function searchProduct(Request $request): JsonResponse
     {
