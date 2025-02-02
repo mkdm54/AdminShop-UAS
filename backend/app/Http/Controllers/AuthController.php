@@ -78,6 +78,32 @@ class AuthController
     public function registerAccount(Request $request)
     {
         try {
+            $username = $request->input('username');
+
+            // Cek jika username mengandung spasi
+            if (strpos($username, ' ') !== false) {
+                return response()->json([
+                    'error' => 'Username tidak boleh mengandung spasi, gunakan underscore (_) sebagai pengganti.',
+                    'redirect' => route('register.form')
+                ], 422);
+            }
+
+            // Cek jika username hanya berisi underscore (_)
+            if (preg_match('/^_+$/', $username)) {
+                return response()->json([
+                    'error' => 'Username tidak boleh hanya berisi underscore (_).',
+                    'redirect' => route('register.form')
+                ], 422);
+            }
+
+            // Cek apakah username mengandung karakter yang tidak diizinkan
+            if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
+                return response()->json([
+                    'error' => 'Username hanya boleh mengandung huruf, angka, dan underscore (_).',
+                    'redirect' => route('register.form')
+                ], 422);
+            }
+
             $request->validate([
                 'username' => ['required', 'string', 'min:4', 'max:50', 'unique:users,username'],
                 'password' => ['required', 'string', 'min:6'],
