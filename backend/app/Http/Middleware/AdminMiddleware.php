@@ -19,6 +19,8 @@ class AdminMiddleware
     {
         if (Auth::check() && Auth::user()->role === 'admin') {
             Log::info('AdminMiddleware dijalankan.');
+            $username = Auth::user()->username;
+            session()->put('username', $username);
             return $next($request);
         }
         Log::warning('Akses ditolak. Role: ' . (Auth::check() ? Auth::user()->role : 'null'));
