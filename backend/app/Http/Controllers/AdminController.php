@@ -15,7 +15,7 @@ class AdminController
      */
     public function index()
     {
-        $username = Auth::user()->username;
+        $username = session('username');
         session()->put('username', $username);
         return view('admin.dashboard', compact('username'));
     }
