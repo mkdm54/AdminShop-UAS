@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminController
 {
@@ -13,15 +15,51 @@ class AdminController
      */
     public function index()
     {
-        $username = Auth::user()->username;
+        $username = session('username');
+        session()->put('username', $username);
         return view('admin.dashboard', compact('username'));
     }
 
     public function showAllProducts()
     {
-        $username = Auth::user()->username;
-        $products =  Product::all();
+        $username = session('username');
+        $products = Product::all();
         return view('admin.show_product', compact('username', 'products'));
+    }
+
+    public function showRegularUsers()
+    {
+        $username = session('username');
+        $regularUsers = User::where('role', '!=', 'admin')->get();
+        return view('admin.regular_users', compact('username', 'regularUsers'));
+    }
+
+    public function deleteAccount(string $id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.showRegularUsers');
+    }
+
+    public function searchProduct(Request $request): JsonResponse
+    {
+        $request->validate([
+            'search' => 'required'
+        ]);
+
+        $searchProduct =  $request->input('search');
+
+        $result = Product::where('product_name', 'LIKE', '%' . $searchProduct . '%')
+            ->orWhere('description', 'LIKE', '%' . $searchProduct . '%')
+            ->get();
+
+        if ($result->isEmpty()) {
+            return response()->json([
+                'message' => 'No products found'
+            ], 404);
+        }
+
+        return response()->json($result);
     }
 
     /**
@@ -29,7 +67,7 @@ class AdminController
      */
     public function create()
     {
-        $username = Auth::user()->username;
+        $username = session('username');
         return view('admin.add_product', compact('username'));
     }
 
@@ -68,7 +106,7 @@ class AdminController
      */
     public function edit(string $id)
     {
-        $username = Auth::user()->username;
+        $username = session('username');
         $product = Product::findOrFail($id);
         return view('admin.edit_product', compact('product', 'username'));
     }

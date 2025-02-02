@@ -1,6 +1,10 @@
 @props(['products'])
 
 <div class="p-6 px-0">
+    {{-- *search-bar --}}
+    <x-search-bar :id="'search-product'" :name="'search'" :placeholder="'Search for products...'"></x-search-bar>
+
+    {{-- *product-table --}}
     <table class="mt-4 w-full min-w-max table-auto text-left border">
         <thead class="bg-blue-500">
             <tr>
@@ -55,7 +59,7 @@
         </thead>
         <tbody>
             @foreach ($products as $product)
-                <tr>
+                <tr class="product-row">
                     <td class="p-4 border border-gray-400">
                         <div class="flex items-center gap-3">
                             <div class="flex flex-col">
